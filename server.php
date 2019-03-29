@@ -13,6 +13,11 @@ socket_set_option($socket, SOL_SOCKET, SO_REUSEADDR, 1);
 socket_bind($socket, $host, $port) or die("Could not bind to socket\n");
 socket_listen($socket, 3) or die("Could not set up socket listener");
 $clients = array($socket);
+$servers = array(
+    "" => "",
+    "" => "",
+
+);
 
 while(true) {
      $read = $clients;
@@ -52,6 +57,36 @@ while(true) {
                  "message" => $message[0],
                  "user_id" => $message[1]
              ];
+
+             $lat = explode(".", $message[2]);
+             $lng = explode(".", $message[3]);
+
+             $gps_lat = array(
+                 "gps_degree" => $lat[0],
+                 "gps_minute" => substr($lat[1], 0, 2),
+                 "gps_decimals" => substr($lab[1], 2)
+             );
+
+            $gps_lng = array(
+                "gps_degree" => $lng[0],
+                "gps_minute" => substr($lng[1], 0, 2),
+                "gps_decimals" => substr($lng[1], 2)
+            );
+             /*if ($lng < -83.220059) {
+                 echo "Out of range";
+             } else if ($lng < -83.206406) {
+                 if ($lat < 42.665945) {
+                     echo "Out of range";
+                 } else if ($lat < 42.673340) {
+                     echo "Success!";
+                 } else if ($lat < 42.679222) {
+                     echo "Success!";
+                 } else {
+                     echo "Out of range";
+                 }
+             } else {
+                 echo "Out of range";
+             }*/
 
              $sql = "INSERT INTO messages (message, user_id) values (:message, :user_id)";
              $stmt = $db->prepare($sql);
