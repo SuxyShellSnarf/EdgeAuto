@@ -6,6 +6,7 @@ user_id int unsigned auto_increment primary key
 -- This is where the actual CANbus message will be stored on the edge nodes
 create table messages (
 message_id int unsigned auto_increment primary key,
+timestamp datetime,
 message varchar(255),
 user_id int unsigned,
 foreign key (user_id) references user(user_id)
