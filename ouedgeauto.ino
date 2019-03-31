@@ -33,7 +33,6 @@ void setup() {
 }
 
 int counter = 0;
-bool gpsValid = false;
 String backlog[500];
 
 void loop() {
@@ -77,7 +76,7 @@ void loop() {
         Particle.publish(package, PUBLIC);
     }*/
 
-    gpsValid = carloop.gps().location.isValid();
+    bool gpsValid = carloop.gps().location.isValid();
 
     if (gpsValid) {
         float lat = carloop.gps().location.lat();
@@ -147,6 +146,5 @@ void loop() {
         toggle = !toggle;
     }
 
-    gpsValid = false;
     delay(1000);
 }
