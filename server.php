@@ -103,7 +103,7 @@ while(true) {
                 $canbus = array(
                     "arb_id" => $canbusdump[0],
                     "message" => $canbusdump[1],
-                    "cantime" => $canbusdump[4],
+                    "cantime" => date("Y-m-d H:i:s", $canbusdump[2]),
                     "user_id" => $message[1]
                 );
                 $sql = "INSERT INTO message (arb_id, message, cantime, user_id) values (:arb_id, :message, :cantime, :user_id)";
@@ -113,7 +113,7 @@ while(true) {
                     "message" => $canbusdump[1],
                     "latitude" => $canbusdump[2],
                     "longitude" => $canbusdump[3],
-                    "cantime" => $canbusdump[4],
+                    "cantime" => date("Y-m-d H:i:s", $canbusdump[4]),
                     "user_id" => $message[1]
                 );
                 $sql = "INSERT INTO message (arb_id, message, latitude, longitude, cantime, user_id) values (:arb_id, :message, :latitude, :longitude, :cantime, :user_id)";
