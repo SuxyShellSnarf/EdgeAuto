@@ -125,7 +125,6 @@ void loop() {
         }
     } else {
         Particle.publish("INVALID~GPS", PUBLIC);
-        Particle.publish(Time.timeStr());
         CANMessage message;
         String Canmessage = "";
         String package = "";
@@ -139,6 +138,10 @@ void loop() {
             package.concat(Canmessage);
             package.concat(",");
         }
+        package.concat(Time.timeStr());
+        Particle.publish(Time.timeStr());
+        package.concat(";1");
+        client.write(package);
     }
 
     String response = "";

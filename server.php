@@ -92,7 +92,13 @@ while(true) {
              } else {
                  echo "Out of range";
              }*/
-            if (count($canbusdump) == 2) {
+            if (count($canbusdump) == 1) {
+                $canbus = array(
+                    "cantime" => date("Y-m-d H:i:s", $canbusdump[0]),
+                    "user_id" => $message[1]
+                );
+                $sql = "INSERT INTO message (arb_id, message, user_id) values (:arb_id, :message, :user_id)";
+            } else if (count($canbusdump) == 2) {
                 $canbus = array(
                     "arb_id" => $canbusdump[0],
                     "message" => $canbusdump[1],
