@@ -161,6 +161,8 @@ void loop() {
             counter = 0;
         }
         toggle = !toggle;
+    } else {
+        counter++;
     }
 
     delay(1000);
