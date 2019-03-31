@@ -2,7 +2,6 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="12708640-77f2-44d8-bd76-cc22b77c10c3" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/ouedgeauto.ino" beforeDir="false" afterPath="$PROJECT_DIR$/ouedgeauto.ino" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/server.php" beforeDir="false" afterPath="$PROJECT_DIR$/server.php" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
@@ -37,14 +36,14 @@
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
           <entry key="ino" value="192" />
-          <entry key="php" value="647" />
+          <entry key="php" value="661" />
           <entry key="sql" value="111" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
           <entry key="C++" value="191" />
-          <entry key="PHP" value="647" />
+          <entry key="PHP" value="661" />
           <entry key="PLAIN_TEXT" value="1" />
           <entry key="SQL" value="111" />
         </counts>
@@ -57,7 +56,7 @@
         <entry file="file://$PROJECT_DIR$/server.php">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="473">
-              <caret line="96" column="68" selection-start-line="96" selection-start-column="68" selection-end-line="96" selection-end-column="68" />
+              <caret line="96" column="47" selection-start-line="96" selection-start-column="47" selection-end-line="96" selection-end-column="47" />
             </state>
           </provider>
         </entry>
@@ -65,8 +64,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/ouedgeauto.ino">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="1526">
-              <caret line="118" column="13" selection-end-line="166" selection-end-column="1" />
+            <state relative-caret-position="455">
+              <caret line="55" lean-forward="true" selection-start-line="55" selection-end-line="55" />
             </state>
           </provider>
         </entry>
@@ -165,12 +164,12 @@
       <updated>1553832229457</updated>
       <workItem from="1553832232677" duration="2743000" />
       <workItem from="1553994152650" duration="949000" />
-      <workItem from="1554062273175" duration="5674000" />
+      <workItem from="1554062273175" duration="6067000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="9366000" />
+    <option name="totallyTimeSpent" value="9759000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="844" y="621" width="2642" height="1447" extended-state="0" />
@@ -234,15 +233,15 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/ouedgeauto.ino">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="1526">
-          <caret line="118" column="13" selection-end-line="166" selection-end-column="1" />
+        <state relative-caret-position="455">
+          <caret line="55" lean-forward="true" selection-start-line="55" selection-end-line="55" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/server.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="473">
-          <caret line="96" column="68" selection-start-line="96" selection-start-column="68" selection-end-line="96" selection-end-column="68" />
+          <caret line="96" column="47" selection-start-line="96" selection-start-column="47" selection-end-line="96" selection-end-column="47" />
         </state>
       </provider>
     </entry>

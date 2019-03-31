@@ -94,7 +94,7 @@ while(true) {
              }*/
             if (count($canbusdump) == 1) {
                 $canbus = array(
-                    "cantime" => date("Y-m-d H:i:s", $canbusdump[0]),
+                    "cantime" => $canbusdump[0],
                     "user_id" => $message[1]
                 );
                 $sql = "INSERT INTO message (cantime, user_id) values (:cantime, :user_id)";
