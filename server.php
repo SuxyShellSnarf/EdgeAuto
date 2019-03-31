@@ -61,14 +61,7 @@ while(true) {
 
              $canbusdump = explode(",", $message[0]);
 
-             $canbus = array(
-                 "arb_id" => $canbusdump[0],
-                 "message" => $canbusdump[1],
-                 "latitude" => $canbusdump[2],
-                 "longitude" => $canbusdump[3],
-                 "cantime" => $canbusdump[4],
-                 "user_id" => $message[1]
-             );
+
              /**
              $lat = explode(".", $message[2]);
              $lng = explode(".", $message[3]);
@@ -84,8 +77,7 @@ while(true) {
                 "gps_minute" => substr($lng[1], 0, 2),
                 "gps_decimals" => substr($lng[1], 2)
              );
-              */
-             /*if ($lng < -83.220059) {
+              if ($lng < -83.220059) {
                  echo "Out of range";
              } else if ($lng < -83.206406) {
                  if ($lat < 42.665945) {
@@ -100,9 +92,34 @@ while(true) {
              } else {
                  echo "Out of range";
              }*/
+            if (count($canbusdump) == 2) {
+                $canbus = array(
+                    "arb_id" => $canbusdump[0],
+                    "message" => $canbusdump[1],
+                    "user_id" => $message[1]
+                );
+                $sql = "INSERT INTO message (arb_id, message, user_id) values (:arb_id, :message, :user_id)";
+            } else if (count($canbusdump) == 3) {
+                $canbus = array(
+                    "arb_id" => $canbusdump[0],
+                    "message" => $canbusdump[1],
+                    "cantime" => $canbusdump[4],
+                    "user_id" => $message[1]
+                );
+                $sql = "INSERT INTO message (arb_id, message, cantime, user_id) values (:arb_id, :message, :cantime, :user_id)";
+            } else {
+                $canbus = array(
+                    "arb_id" => $canbusdump[0],
+                    "message" => $canbusdump[1],
+                    "latitude" => $canbusdump[2],
+                    "longitude" => $canbusdump[3],
+                    "cantime" => $canbusdump[4],
+                    "user_id" => $message[1]
+                );
+                $sql = "INSERT INTO message (arb_id, message, latitude, longitude, cantime, user_id) values (:arb_id, :message, :latitude, :longitude, :cantime, :user_id)";
+            }
 
              //Add this information!
-             $sql = "INSERT INTO message (arb_id, message, latitude, longitude, cantime, user_id) values (:arb_id, :message, :latitude, :longitude, :cantime, :user_id)";
              $stmt = $db->prepare($sql);
              $stmt->execute($canbus);
              echo "Package: " . print_r($canbusdump, true);

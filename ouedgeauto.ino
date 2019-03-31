@@ -1,6 +1,7 @@
 // This #include statement was automatically added by the Particle IDE.
 #include <carloop.h>
 #include <string>
+#include <ctime>
 
 //carloop object
 Carloop<CarloopRevision2> carloop;
@@ -11,12 +12,11 @@ TinyGPSPlus gps;
 TCPClient client;
 byte server[] = { 35, 237, 136, 160};
 byte server2[] = { 104, 196, 99, 233 };
-Time time;
 
 bool toggle = false;
 
 void setup() {
-    time.zone(-4);
+    Time.zone(-4);
     WiFi.on();
     WiFiCredentials credentials("Samsung Galaxy Note8 5908", WPA2);
 
@@ -102,7 +102,7 @@ void loop() {
         }
         package.concat(gps);
         package.concat(",");
-        package.concat(time.timeStr());
+        package.concat(Time.timeStr());
         package.concat(";1");
 
         if (client.connected()) {
@@ -125,6 +125,20 @@ void loop() {
         }
     } else {
         Particle.publish("INVALID~GPS", PUBLIC);
+        Particle.publish(Time.timeStr());
+        CANMessage message;
+        String Canmessage = "";
+        String package = "";
+
+        if (carloop.can().receive(message)) {
+            package.concat(message.id);
+            package.concat(",");
+            for (int i = 0; i < message.len; i++) {
+                Canmessage.concat(message.data[i]);
+            }
+            package.concat(Canmessage);
+            package.concat(",");
+        }
     }
 
     String response = "";
