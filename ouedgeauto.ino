@@ -134,8 +134,6 @@ void loop() {
         response.concat(c);
     }
 
-    counter ++;
-
     if (counter == 15) {
         if (!toggle) {
             client.stop();
