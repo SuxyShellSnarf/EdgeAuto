@@ -1,6 +1,7 @@
 <?php
 //First initialize the database information
-$host = "34.73.219.7";
+//$host = "10.142.0.4";
+//$host = "10.142.0.7";
 $port = 8001;
 
 $db = new PDO("mysql:host=localhost;dbname=EdgeAuto", "edgeauto", "edgeauto19!");

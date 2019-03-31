@@ -9,8 +9,8 @@ Carloop<CarloopRevision2> carloop;
 TinyGPSPlus gps;
 
 TCPClient client;
-byte server[4];
-byte server2[] = { 192, 168, 1, 109 };
+byte server[] = { 35, 237, 136, 160};
+byte server2[] = { 104, 196, 99, 233 };
 Time time;
 
 bool toggle = false;
