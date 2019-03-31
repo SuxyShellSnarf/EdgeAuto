@@ -3,7 +3,7 @@
 $host = "34.73.219.7";
 $port = 8001;
 
-$db = new PDO("mysql:host=localhost;dbname=edgeauto", "root", "Bandit08");
+$db = new PDO("mysql:host=localhost;dbname=EdgeAuto", "edgeauto", "edgeauto19!");
 
 set_time_limit(0);
 
@@ -58,10 +58,11 @@ while(true) {
              //Break down the message into parts : user_id, message, lat, lng
              $message = explode(";", $data);
 
-             $package = [
-                 "message" => $message[0],
-                 "user_id" => $message[1]
-             ];
+             $canbusdump = explode(",", $message[0]);
+
+             $canbus = array(
+                 "arb_id" => ""
+             );
 
              $lat = explode(".", $message[2]);
              $lng = explode(".", $message[3]);
@@ -94,7 +95,7 @@ while(true) {
              }*/
 
              //Add this information!
-             $sql = "INSERT INTO messages (message, user_id) values (:message, :user_id)";
+             $sql = "INSERT INTO message (message, user_id) values (:message, :user_id)";
              $stmt = $db->prepare($sql);
              $stmt->execute($package);
              echo "Clients: " . print_r($clients, true);
