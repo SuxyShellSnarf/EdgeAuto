@@ -53,7 +53,7 @@ while(true) {
 
         //If there is data, proceed
         if (!empty($data)) {
-             echo " send {$data}\n";
+             echo "Data sent {$data}\n";
 
              //Break down the message into parts : user_id, message, lat, lng
              $message = explode(";", $data);
@@ -61,9 +61,14 @@ while(true) {
              $canbusdump = explode(",", $message[0]);
 
              $canbus = array(
-                 "arb_id" => ""
+                 "arb_id" => $canbusdump[0],
+                 "message" => $canbusdump[1],
+                 "latitude" => $canbusdump[2],
+                 "longitude" => $canbusdump[3],
+                 "cantime" => $canbusdump[4],
+                 "user_id" => $message[1]
              );
-
+             /**
              $lat = explode(".", $message[2]);
              $lng = explode(".", $message[3]);
 
@@ -73,11 +78,12 @@ while(true) {
                  "gps_decimals" => substr($lab[1], 2)
              );
 
-            $gps_lng = array(
+             $gps_lng = array(
                 "gps_degree" => $lng[0],
                 "gps_minute" => substr($lng[1], 0, 2),
                 "gps_decimals" => substr($lng[1], 2)
-            );
+             );
+              */
              /*if ($lng < -83.220059) {
                  echo "Out of range";
              } else if ($lng < -83.206406) {
@@ -95,11 +101,10 @@ while(true) {
              }*/
 
              //Add this information!
-             $sql = "INSERT INTO message (message, user_id) values (:message, :user_id)";
+             $sql = "INSERT INTO message (arb_id, message, latitude, longitude, cantime, user_id) values (:arb_id, :message, :latitude, :longitude, :cantime, :user_id)";
              $stmt = $db->prepare($sql);
-             $stmt->execute($package);
-             echo "Clients: " . print_r($clients, true);
-             echo "Package: " . print_r($package, true);
+             $stmt->execute($canbusdump);
+             echo "Package: " . print_r($canbusdump, true);
 
              //Respond
              foreach ($clients as $send_socket) {

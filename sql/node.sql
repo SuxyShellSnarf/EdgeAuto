@@ -8,10 +8,10 @@ create table message (
 message_id int unsigned auto_increment primary key,
 created dateime default CURRENT_TIMESTAMP,
 arb_id int unsigned,
+message varchar(255),
 latitude float,
 longitude float,
-timestamp datetime,
-message varchar(255),
+cantime datetime,
 user_id int unsigned,
 foreign key (user_id) references user(user_id)
 );
