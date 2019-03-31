@@ -128,7 +128,7 @@ while(true) {
              //Add this information!
              $stmt = $db->prepare($sql);
              $stmt->execute($canbus);
-             echo "Package: " . print_r($canbusdump, true);
+             echo "Package: " . print_r($canbus, true);
 
              //Respond
              foreach ($clients as $send_socket) {
