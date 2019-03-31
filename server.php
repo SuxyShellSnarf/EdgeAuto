@@ -42,7 +42,7 @@ while(true) {
         $data = @socket_read($read_socket, 4096, PHP_BINARY_READ);
 
         //Iterate through all of the connected lines and determine if any have been disconnected and remove them
-        if ($data === false) {
+        if ($data === "") {
              $key = array_search($read_socket, $clients);
              unset($clients[$key]);
              echo "client disconnected.\n";
@@ -103,7 +103,7 @@ while(true) {
              //Add this information!
              $sql = "INSERT INTO message (arb_id, message, latitude, longitude, cantime, user_id) values (:arb_id, :message, :latitude, :longitude, :cantime, :user_id)";
              $stmt = $db->prepare($sql);
-             $stmt->execute($canbusdump);
+             $stmt->execute($canbus);
              echo "Package: " . print_r($canbusdump, true);
 
              //Respond
