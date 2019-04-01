@@ -106,7 +106,7 @@ void loop() {
         package.concat(";1");
 
         if (client.connected()) {
-            if (counter > 0) {
+            /*if (counter > 0) {
                 int tCounter = 0;
                 while (tCounter < counter) {
 
@@ -116,7 +116,7 @@ void loop() {
             while (counter > 0) {
                 counter--;
                 Particle.publish(backlog[counter]);
-            }
+            }*/
             client.write(package);
             Particle.publish(package, PUBLIC);
         } else {
