@@ -81,6 +81,10 @@ void loop() {
     if (gpsValid) {
         float lat = carloop.gps().location.lat();
         float lng = carloop.gps().location.lng();
+        if (lat < 42.839807) {
+            client.stop();
+            client.connect(server2, 8001);
+        }
         String gps = "";
         String package = "";
 
@@ -124,7 +128,7 @@ void loop() {
             counter++;
         }
     } else {
-        Particle.publish("INVALID~GPS", PUBLIC);
+        //Particle.publish("INVALID~GPS", PUBLIC);
         CANMessage message;
         String Canmessage = "";
         String package = "";
@@ -150,7 +154,7 @@ void loop() {
         response.concat(c);
     }
 
-    if (counter == 15) {
+    /*if (counter == 15) {
         if (!toggle) {
             client.stop();
             client.connect(server2, 8001);
@@ -163,7 +167,7 @@ void loop() {
         toggle = !toggle;
     } else {
         counter++;
-    }
+    }*/
 
     delay(1000);
 }

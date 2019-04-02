@@ -1,7 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="12708640-77f2-44d8-bd76-cc22b77c10c3" name="Default Changelist" comment="" />
+    <list default="true" id="12708640-77f2-44d8-bd76-cc22b77c10c3" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/ouedgeauto.ino" beforeDir="false" afterPath="$PROJECT_DIR$/ouedgeauto.ino" afterDir="false" />
+    </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -33,14 +35,14 @@
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
-          <entry key="ino" value="216" />
+          <entry key="ino" value="307" />
           <entry key="php" value="664" />
           <entry key="sql" value="124" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="C++" value="215" />
+          <entry key="C++" value="306" />
           <entry key="PHP" value="664" />
           <entry key="PLAIN_TEXT" value="1" />
           <entry key="SQL" value="124" />
@@ -62,8 +64,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/ouedgeauto.ino">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-1624">
-              <caret line="62" column="45" lean-forward="true" selection-start-line="62" selection-start-column="45" selection-end-line="62" selection-end-column="45" />
+            <state relative-caret-position="962">
+              <caret line="130" column="10" selection-start-line="130" selection-start-column="10" selection-end-line="130" selection-end-column="10" />
             </state>
           </provider>
         </entry>
@@ -100,11 +102,11 @@
   <component name="PhpServers">
     <servers />
   </component>
-  <component name="ProjectFrameBounds">
-    <option name="x" value="2456" />
-    <option name="y" value="863" />
+  <component name="ProjectFrameBounds" extendedState="1">
+    <option name="x" value="189" />
+    <option name="y" value="434" />
     <option name="width" value="1361" />
-    <option name="height" value="1447" />
+    <option name="height" value="1446" />
   </component>
   <component name="ProjectView">
     <navigator proportions="" version="1">
@@ -162,15 +164,15 @@
       <updated>1553832229457</updated>
       <workItem from="1553832232677" duration="2743000" />
       <workItem from="1553994152650" duration="949000" />
-      <workItem from="1554062273175" duration="10599000" />
+      <workItem from="1554062273175" duration="12918000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="14291000" />
+    <option name="totallyTimeSpent" value="16610000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="2456" y="863" width="1361" height="1447" extended-state="0" />
+    <frame x="189" y="434" width="1361" height="1446" extended-state="1" />
     <editor active="true" />
     <layout>
       <window_info content_ui="combo" id="Project" order="0" weight="0.14667746" />
@@ -238,8 +240,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/ouedgeauto.ino">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1624">
-          <caret line="62" column="45" lean-forward="true" selection-start-line="62" selection-start-column="45" selection-end-line="62" selection-end-column="45" />
+        <state relative-caret-position="962">
+          <caret line="130" column="10" selection-start-line="130" selection-start-column="10" selection-end-line="130" selection-end-column="10" />
         </state>
       </provider>
     </entry>
