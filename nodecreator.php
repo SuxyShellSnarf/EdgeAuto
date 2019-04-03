@@ -65,7 +65,7 @@ $coordinates[] = array(
 
 foreach ($coordinates as $lat) {
     foreach ($lat as $coord => $v) {
-        echo $coord["lat_degrees"] . "." . $coord["lat_minutes"] . "\n";
-        echo $coord["lng_degrees"] . "." . $coord["lng_minutes"] . "\n";
+        echo $v["lat_degrees"] . "." . $v["lat_minutes"] . "\n";
+        echo $v["lng_degrees"] . "." . $v["lng_minutes"] . "\n";
     }
 }
