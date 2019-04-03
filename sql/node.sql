@@ -27,10 +27,10 @@ foreign key (location_id) references location(location_id)
 -- This is the normalized gps boundaries for a vm, this is what vm is referencing
 create table location (
 location_id int unsigned auto_increment primary key,
-x1y1 int,
-x1y2 int,
-x2y1 int,
-x2y2 int,
+x1y1 int unsigned,
+x1y2 int unsigned,
+x2y1 int unsigned,
+x2y2 int unsigned,
 foreign key (x1y1) references coordinate(coordinate_id),
 foreign key (x1y2) references coordinate(coordinate_id),
 foreign key (x2y1) references coordinate(coordinate_id),
