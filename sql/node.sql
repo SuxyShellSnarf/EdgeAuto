@@ -31,15 +31,15 @@ x1y1 int,
 x1y2 int,
 x2y1 int,
 x2y2 int,
-foreign key (x1y1) references gps(gps_id),
-foreign key (x1y2) references gps(gps_id),
-foreign key (x2y1) references gps(gps_id),
-foreign key (x2y2) references gps(gps_id)
+foreign key (x1y1) references coordinate(coordinate_id),
+foreign key (x1y2) references coordinate(coordinate_id),
+foreign key (x2y1) references coordinate(coordinate_id),
+foreign key (x2y2) references coordinate(coordinate_id)
 );
 
 -- This is where the gps data actually lies and will be used to determine the approximate location of a user
 create table coordinate (
-gps_id int unsigned auto_increment primary key,
+coordinate_id int unsigned auto_increment primary key,
 x_degree tinyint,
 x_minutes mediumint unsigned,
 y_degree smallint,
