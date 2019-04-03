@@ -62,3 +62,9 @@ $coordinates[] = array(
         "lng_minutes" => "20"
     )
 );
+
+foreach ($coordinates as $lat) {
+    foreach ($lat as $coord) {
+        echo print_r($coord, true);
+    }
+}
