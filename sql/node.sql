@@ -42,3 +42,7 @@ create table gps (
 gps_id int unsigned auto_increment primary key,
 boundary int
 );
+
+-- Use tinyint for latitude degree
+-- Use smallint for longitude degree
+-- Use mediumint unsigned for latitude and longitude "minutes"
