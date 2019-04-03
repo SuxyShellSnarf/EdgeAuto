@@ -8,46 +8,57 @@
 
 $coordinates[] = array(
     array(
-        "lat_degrees" => "",
-        "lat_minutes" => "",
-        "lng_degrees" => "",
-        "lng_minutes" => "",
+        "lat_degrees" => "42",
+        "lat_minutes" => "68",
+        "lng_degrees" => "-83",
+        "lng_minutes" => "22"
     ), array(
-        "lat_degrees" => "",
-        "lat_minutes" => "",
-        "lng_degrees" => "",
-        "lng_minutes" => "",
+        "lat_degrees" => "42",
+        "lat_minutes" => "68",
+        "lng_degrees" => "-83",
+        "lng_minutes" => "21"
     ), array(
-        "lat_degrees" => "",
-        "lat_minutes" => "",
-        "lng_degrees" => "",
-        "lng_minutes" => "",
-    )
-);
-
-$coordinates[] = array(
-    array("lat_degrees" => "",
-        "lat_minutes" => "",
-        "lng_degrees" => "",
-        "lng_minutes" => "",
-    ), array(
-        "degrees" => "",
-        "minutes"
-    ), array(
-        "degrees" => "",
-        "minutes"
+        "lat_degrees" => "42",
+        "lat_minutes" => "68",
+        "lng_degrees" => "-83",
+        "lng_minutes" => "20"
     )
 );
 
 $coordinates[] = array(
     array(
-        "degrees" => "",
-        "minutes"
+        "lat_degrees" => "42",
+        "lat_minutes" => "67",
+        "lng_degrees" => "-83",
+        "lng_minutes" => "22"
     ), array(
-        "degrees" => "",
-        "minutes"
+        "lat_degrees" => "42",
+        "lat_minutes" => "67",
+        "lng_degrees" => "-83",
+        "lng_minutes" => "21"
     ), array(
-        "degrees" => "",
-        "minutes"
+        "lat_degrees" => "42",
+        "lat_minutes" => "67",
+        "lng_degrees" => "-83",
+        "lng_minutes" => "20"
+    )
+);
+
+$coordinates[] = array(
+    array(
+        "lat_degrees" => "42",
+        "lat_minutes" => "67",
+        "lng_degrees" => "-83",
+        "lng_minutes" => "22"
+    ), array(
+        "lat_degrees" => "42",
+        "lat_minutes" => "67",
+        "lng_degrees" => "-83",
+        "lng_minutes" => "21"
+    ), array(
+        "lat_degrees" => "42",
+        "lat_minutes" => "67",
+        "lng_degrees" => "-83",
+        "lng_minutes" => "20"
     )
 );
