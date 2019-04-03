@@ -1,9 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="12708640-77f2-44d8-bd76-cc22b77c10c3" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/ouedgeauto.ino" beforeDir="false" afterPath="$PROJECT_DIR$/ouedgeauto.ino" afterDir="false" />
-    </list>
+    <list default="true" id="12708640-77f2-44d8-bd76-cc22b77c10c3" name="Default Changelist" comment="" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -102,9 +100,9 @@
   <component name="PhpServers">
     <servers />
   </component>
-  <component name="ProjectFrameBounds" extendedState="1">
-    <option name="x" value="189" />
-    <option name="y" value="434" />
+  <component name="ProjectFrameBounds">
+    <option name="x" value="281" />
+    <option name="y" value="659" />
     <option name="width" value="1361" />
     <option name="height" value="1446" />
   </component>
@@ -164,15 +162,15 @@
       <updated>1553832229457</updated>
       <workItem from="1553832232677" duration="2743000" />
       <workItem from="1553994152650" duration="949000" />
-      <workItem from="1554062273175" duration="12918000" />
+      <workItem from="1554062273175" duration="13222000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="16610000" />
+    <option name="totallyTimeSpent" value="16914000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="189" y="434" width="1361" height="1446" extended-state="1" />
+    <frame x="138" y="148" width="1361" height="1446" extended-state="0" />
     <editor active="true" />
     <layout>
       <window_info content_ui="combo" id="Project" order="0" weight="0.14667746" />
