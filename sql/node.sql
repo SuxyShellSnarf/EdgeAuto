@@ -41,9 +41,9 @@ foreign key (x2y2) references gps(gps_id)
 create table coordinate (
 gps_id int unsigned auto_increment primary key,
 x_degree tinyint,
-x_minutes mediumint,
+x_minutes mediumint unsigned,
 y_degree smallint,
-y_minutes mediumint
+y_minutes mediumint unsigned
 );
 
 -- Use tinyint for latitude degree
