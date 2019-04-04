@@ -28,13 +28,13 @@ foreign key (location_id) references location(location_id)
 create table location (
 location_id int unsigned auto_increment primary key,
 upperlat_degree tinyint,
-upperlat_minutes mediumtint unsigned,
+upperlat_minutes mediumint unsigned,
 lowerlat_degree tinyint,
 lowerlat_minutes mediumint unsigned,
 upperlng_degree smallint,
-upperlng_minutes mediumtint unsigned,
+upperlng_minutes mediumint unsigned,
 lowerlng_degree smallint,
-lowerlng_minutes mediumint unsigned,
+lowerlng_minutes mediumint unsigned
 );
 
 -- This is where the gps data actually lies and will be used to determine the approximate location of a user
