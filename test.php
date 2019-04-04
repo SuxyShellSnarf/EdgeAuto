@@ -11,7 +11,7 @@ $db = new PDO("mysql:host=localhost;dbname=EdgeAuto", "edgeauto", "edgeauto19!")
 ini_set('memory_limit', '-1');
 
 $x = 90;
-$decrement = 0.5;
+$decrement = 0.3;
 $y = 180;
 $latitude = array();
 $longitude = array();
