@@ -20,57 +20,26 @@ while ($x >= -90) {
     $package = array(
         "lat" => $x
     );
-    //echo print_r($package, true);
     $latitude[] = $package;
     $x = $x - $decrement;
 }
-
-$minutes = 0;
 
 while ($y >= -180) {
     $package = array(
         "lng" => $y
     );
-    //echo print_r($package, true);
     $longitude[] = $package;
 
     $y = $y - $decrement;
 
 }
-/*
-echo print_r($latitude, true);
-echo print_r($longitude, true);
-
-echo print_r($latitude[0], true);
-echo print_r($latitude[1800], true);
-echo print_r($longitude[0], true);
-echo print_r($longitude[3600], true);
-*/
-/*
-$counter = 0;
-foreach ($latitude as $lat) {
-    echo $counter . "\n";
-    $counter++;
-    foreach ($lat as $l => $v) {
-        echo $l . " : " . $v . "\n";
-    }
-}
-
-$counter = 0;
-foreach ($longitude as $lng) {
-    echo $counter . "\n";
-    $counter++;
-    foreach ($lng as $l => $v) {
-        echo $l . " : " . $v . "\n";
-    }
-}*/
 
 $coordinates = array();
-
-//echo count($latitude);
-//echo count($longitude);
-
 $latcounter = 0;
+
+echo count($latitude);
+echo count($longitude);
+
 while ($latcounter < count($latitude) - 1) {
     $lngcounter = 0;
     while ($lngcounter < count($longitude) - 1) {
@@ -88,13 +57,4 @@ while ($latcounter < count($latitude) - 1) {
         $lngcounter++;
     }
     $latcounter++;
-}
-
-//echo count($coordinates);
-
-/*
-$counter = 0;
-while ($counter < count($coordinates)) {
-    $string = "insert into location (upperlat_degree, upperlat_minutes, lowerlat_degree, lowerlat_minutes, upperlng_degree, upperlng_minutes, lowerlng_degree, lowerlng_minutes) values (" . $coordinates[$counter]["upperlat_degree"] . ", " . $coordinates[$counter]["upperlat_minutes"] . ", " . $coordinates[$counter]["lowerlat_degree"] . ", " . $coordinates[$counter]["lowerlat_minutes"] . ", " . $coordinates[$counter]["upperlng_degree"] . ", " . $coordinates[$counter]["upperlng_minutes"] . ", " . $coordinates[$counter]["lowerlng_degree"] . ", " . $coordinates[$counter]["lowerlng_minutes"] . ")\n";
-    echo $string;
 }
