@@ -37,6 +37,14 @@ lowerlng_degree smallint,
 lowerlng_minutes mediumint unsigned
 );
 
+create table location1 (
+location_id int unsigned auto_increment primary key,
+upperlat float,
+lowerlat float,
+upperlng float,
+lowerlng float
+);
+
 -- This is where the gps data actually lies and will be used to determine the approximate location of a user
 create table coordinate (
 coordinate_id int unsigned auto_increment primary key,

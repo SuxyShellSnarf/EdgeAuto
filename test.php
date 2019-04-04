@@ -11,43 +11,30 @@ $db = new PDO("mysql:host=localhost;dbname=EdgeAuto", "edgeauto", "edgeauto19!")
 ini_set('memory_limit', '-1');
 
 $x = 90;
-$minutes = 0;
+$decrement = 0.5;
 $y = 180;
 $latitude = array();
 $longitude = array();
 
 while ($x >= -90) {
     $package = array(
-        "degree" => $x,
-        "minutes" => $minutes
+        "lat" => $x
     );
     //echo print_r($package, true);
     $latitude[] = $package;
-    if ($minutes == 0) {
-        $x--;
-        $minutes = 800000;
-    } else {
-        $minutes = $minutes - 200000;
-    }
-
-
+    $x = $x - $decrement;
 }
 
 $minutes = 0;
 
 while ($y >= -180) {
     $package = array(
-        "degree" => $y,
-        "minutes" => $minutes
+        "lng" => $y
     );
     //echo print_r($package, true);
     $longitude[] = $package;
-    if ($minutes == 0) {
-        $y--;
-        $minutes = 800000;
-    } else {
-        $minutes = $minutes - 200000;
-    }
+
+    $y = $y - $decrement;
 
 }
 /*
@@ -88,16 +75,12 @@ while ($latcounter < count($latitude) - 1) {
     $lngcounter = 0;
     while ($lngcounter < count($longitude) - 1) {
         $package = array(
-            "upperlat_degree" => $latitude[$latcounter]["degree"],
-            "upperlat_minutes" => $latitude[$latcounter]["minutes"],
-            "lowerlat_degree" => $latitude[$latcounter + 1]["degree"],
-            "lowerlat_minutes" => $latitude[$latcounter + 1]["minutes"],
-            "upperlng_degree" => $longitude[$lngcounter]["degree"],
-            "upperlng_minutes" => $longitude[$lngcounter]["minutes"],
-            "lowerlng_degree" => $longitude[$lngcounter + 1]["degree"],
-            "lowerlng_minutes" => $longitude[$lngcounter + 1]["minutes"]
+            "upperlat" => $latitude[$latcounter]["lat"],
+            "lowerlat" => $latitude[$latcounter + 1]["lat"],
+            "upperlng" => $longitude[$lngcounter]["lng"],
+            "lowerlng" => $longitude[$lngcounter + 1]["lng"]
         );
-        $string = "insert into location (upperlat_degree, upperlat_minutes, lowerlat_degree, lowerlat_minutes, upperlng_degree, upperlng_minutes, lowerlng_degree, lowerlng_minutes) values (:upperlat_degree, :upperlat_minutes, :lowerlat_degree, :lowerlat_minutes, :upperlng_degree, :upperlng_minutes, :lowerlng_degree, :lowerlng_minutes)";
+        $string = "insert into location1 (upperlat, lowerlat, upperlng, lowerlng) values (:upperlat, :lowerlat, :upperlng, :lowerlng)";
         $stmt = $db->prepare($string);
         $stmt->execute($package);
         echo $string;
