@@ -80,8 +80,8 @@ foreach ($longitude as $lng) {
 
 $coordinates = array();
 
-echo count($latitude);
-echo count($longitude);
+//echo count($latitude);
+//echo count($longitude);
 
 $latcounter = 0;
 while ($latcounter < count($latitude) - 1) {
@@ -107,7 +107,7 @@ while ($latcounter < count($latitude) - 1) {
     $latcounter++;
 }
 
-echo count($coordinates);
+//echo count($coordinates);
 
 /*
 $counter = 0;
