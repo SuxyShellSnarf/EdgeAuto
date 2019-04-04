@@ -27,23 +27,21 @@ foreign key (location_id) references location(location_id)
 -- This is the normalized gps boundaries for a vm, this is what vm is referencing
 create table location (
 location_id int unsigned auto_increment primary key,
-x1y1 int unsigned,
-x1y2 int unsigned,
-x2y1 int unsigned,
-x2y2 int unsigned,
-foreign key (x1y1) references coordinate(coordinate_id),
-foreign key (x1y2) references coordinate(coordinate_id),
-foreign key (x2y1) references coordinate(coordinate_id),
-foreign key (x2y2) references coordinate(coordinate_id)
+upperlat_degree tinyint,
+upperlat_minutes mediumtint unsigned,
+lowerlat_degree tinyint,
+lowerlat_minutes mediumint unsigned,
+upperlng_degree smallint,
+upperlng_minutes mediumtint unsigned,
+lowerlng_degree smallint,
+lowerlng_minutes mediumint unsigned,
 );
 
 -- This is where the gps data actually lies and will be used to determine the approximate location of a user
 create table coordinate (
 coordinate_id int unsigned auto_increment primary key,
-x_degree tinyint,
-x_minutes mediumint unsigned,
-y_degree smallint,
-y_minutes mediumint unsigned
+degree smallint,
+minutes mediumint unsigned
 );
 
 -- Use tinyint for latitude degree
