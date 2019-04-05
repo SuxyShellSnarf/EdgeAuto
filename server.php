@@ -99,9 +99,17 @@ while(true) {
              $stmt->execute($canbus);
              echo "Package: " . print_r($canbus, true);
 
-             $sql = "select location_id from location where upperlat <= :latitude and lowerlat > :latitude and upperlng <= :longitude and lowerlng > :longitude";
-             $stmt = $db->prepare($sql);
-             $stmt->execute();
+             if (count($canbus) == 5) {
+                 $sql = "select location_id from location where upperlat >= :latitude and lowerlat < :latitude and upperlng >= :longitude and lowerlng < :longitude";
+                 $stmt = $db->prepare($sql);
+                 $stmt->execute($canbus);
+                 $location_id = $stmt->fetch(PDO::FETCH_ASSOC)["location_id"];
+                 $sql = "select ip_address from vm where location_id = ?";
+                 $sql->bindValue(1, $location_id, PDO::PARAM_INT);
+                 $stmt->execute($canbus);
+                 $ip_address = $stmt->fetch(PDO::FETCH_ASSOC)["ip_address"];
+                 echo "Location_id : " . $ip_address . ";\n";
+             }
 
              //Respond
              foreach ($clients as $send_socket) {

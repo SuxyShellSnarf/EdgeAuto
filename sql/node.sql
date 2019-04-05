@@ -20,7 +20,7 @@ foreign key (user_id) references user(user_id)
 create table vm (
 vm_id int unsigned auto_increment primary key,
 ip_address tinytext not null,
-location_id int unsigned,
+location_id int unsigned unique,
 foreign key (location_id) references location(location_id)
 );
 

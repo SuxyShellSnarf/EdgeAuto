@@ -68,7 +68,10 @@ $sql = "select location_id from location where upperlat >= :latitude and lowerla
 $stmt = $db->prepare($sql);
 $stmt->execute($package);
 $location_id = $stmt->fetch(PDO::FETCH_ASSOC)["location_id"];
-echo "Location_id : " . $location_id . ";\n";
+$sql = "select ip_address from vm where location_id = ?";
+$sql->bindValue(1, $location_id, PDO::PARAM_INT);
+$stmt->execute($package);
+$ip_address = $stmt->fetch(PDO::FETCH_ASSOC)["ip_address"];
 
 $package = array(
     "latitude" => 42.67885,
@@ -79,7 +82,10 @@ $sql = "select location_id from location where upperlat >= :latitude and lowerla
 $stmt = $db->prepare($sql);
 $stmt->execute($package);
 $location_id = $stmt->fetch(PDO::FETCH_ASSOC)["location_id"];
-echo "Location_id : " . $location_id . ";\n";
+$sql = "select ip_address from vm where location_id = ?";
+$sql->bindValue(1, $location_id, PDO::PARAM_INT);
+$stmt->execute($package);
+$ip_address = $stmt->fetch(PDO::FETCH_ASSOC)["ip_address"];
 
 $package = array(
     "latitude" => 42.67298,
@@ -90,7 +96,10 @@ $sql = "select location_id from location where upperlat >= :latitude and lowerla
 $stmt = $db->prepare($sql);
 $stmt->execute($package);
 $location_id = $stmt->fetch(PDO::FETCH_ASSOC)["location_id"];
-echo "Location_id : " . $location_id . ";\n";
+$sql = "select ip_address from vm where location_id = ?";
+$sql->bindValue(1, $location_id, PDO::PARAM_INT);
+$stmt->execute($package);
+$ip_address = $stmt->fetch(PDO::FETCH_ASSOC)["ip_address"];
 
 $package = array(
     "latitude" => 42.67247,
@@ -101,4 +110,7 @@ $sql = "select location_id from location where upperlat >= :latitude and lowerla
 $stmt = $db->prepare($sql);
 $stmt->execute($package);
 $location_id = $stmt->fetch(PDO::FETCH_ASSOC)["location_id"];
-echo "Location_id : " . $location_id . ";\n";
+$sql = "select ip_address from vm where location_id = ?";
+$sql->bindValue(1, $location_id, PDO::PARAM_INT);
+$stmt->execute($package);
+$ip_address = $stmt->fetch(PDO::FETCH_ASSOC)["ip_address"];
