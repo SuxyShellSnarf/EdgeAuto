@@ -101,4 +101,4 @@ $sql = "select location_id from location where upperlat >= :latitude and lowerla
 $stmt = $db->prepare($sql);
 $stmt->execute($package);
 $location_id = $stmt->fetch(PDO::FETCH_ASSOC)["location_id"];
-echo $location_id;
+echo "\n" . $location_id . "\n";
