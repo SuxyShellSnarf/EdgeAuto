@@ -67,4 +67,34 @@ $package = array(
 $sql = "select location_id from location where upperlat <= :latitude and lowerlat >= :latitude and upperlng <= :longitude and lowerlng >= :longitude";
 $stmt = $db->prepare($sql);
 $location_id = $stmt->execute($package);
-echo "Here is a location id : " . $location_id .";";
+echo "Here is a location id : " . $location_id .";\n";
+
+$package = array(
+    "latitude" => 42.67885,
+    "longitude" => -83.20917
+);
+
+$sql = "select location_id from location where upperlat <= :latitude and lowerlat >= :latitude and upperlng <= :longitude and lowerlng >= :longitude";
+$stmt = $db->prepare($sql);
+$location_id = $stmt->execute($package);
+echo "Here is a location id : " . $location_id .";\n";
+
+$package = array(
+    "latitude" => 42.67298,
+    "longitude" => -83.21556
+);
+
+$sql = "select location_id from location where upperlat <= :latitude and lowerlat >= :latitude and upperlng <= :longitude and lowerlng >= :longitude";
+$stmt = $db->prepare($sql);
+$location_id = $stmt->execute($package);
+echo "Here is a location id : " . $location_id .";\n";
+
+$package = array(
+    "latitude" => 42.67247,
+    "longitude" => -83.20762
+);
+
+$sql = "select location_id from location where upperlat <= :latitude and lowerlat >= :latitude and upperlng <= :longitude and lowerlng >= :longitude";
+$stmt = $db->prepare($sql);
+$location_id = $stmt->execute($package);
+echo "Here is a location id : " . $location_id .";\n";
