@@ -69,7 +69,7 @@ $stmt = $db->prepare($sql);
 $stmt->execute($package);
 $location_id = $stmt->fetch(PDO::FETCH_ASSOC)["location_id"];
 $sql = "select ip_address from vm where location_id = ?";
-$sql->bindValue(1, $location_id, PDO::PARAM_INT);
+$sql->bindValue(1, $location_id);
 $stmt->execute($package);
 $ip_address = $stmt->fetch(PDO::FETCH_ASSOC)["ip_address"];
 
