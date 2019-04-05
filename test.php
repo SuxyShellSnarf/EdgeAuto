@@ -64,45 +64,41 @@ $package = array(
     "longitude" => -83.21423
 );
 
-$sql = "select location_id from location where upperlat >= :latitude and lowerlat <= :latitude and upperlng >= :longitude and lowerlng <= :longitude";
+$sql = "select location_id from location where upperlat >= :latitude and lowerlat < :latitude and upperlng >= :longitude and lowerlng < :longitude";
 $stmt = $db->prepare($sql);
 $stmt->execute($package);
-$location_id = $stmt->fetch(PDO::FETCH_ASSOC);
-echo print_r($location_id);
+$location_id = $stmt->fetch(PDO::FETCH_ASSOC)["location_id"];
+echo "Location_id : " . $location_id . ";\n";
 
 $package = array(
     "latitude" => 42.67885,
     "longitude" => -83.20917
 );
 
-$sql = "select location_id from location where upperlat >= :latitude and lowerlat <= :latitude and upperlng >= :longitude and lowerlng <= :longitude";
+$sql = "select location_id from location where upperlat >= :latitude and lowerlat < :latitude and upperlng >= :longitude and lowerlng < :longitude";
 $stmt = $db->prepare($sql);
 $stmt->execute($package);
-$location_id = $stmt->fetch(PDO::FETCH_ASSOC);
-echo print_r($location_id);
+$location_id = $stmt->fetch(PDO::FETCH_ASSOC)["location_id"];
+echo "Location_id : " . $location_id . ";\n";
 
 $package = array(
     "latitude" => 42.67298,
     "longitude" => -83.21556
 );
 
-$sql = "select location_id from location where upperlat >= :latitude and lowerlat <= :latitude and upperlng >= :longitude and lowerlng <= :longitude";
+$sql = "select location_id from location where upperlat >= :latitude and lowerlat < :latitude and upperlng >= :longitude and lowerlng < :longitude";
 $stmt = $db->prepare($sql);
 $stmt->execute($package);
-$location_id = $stmt->fetch(PDO::FETCH_ASSOC);
-echo print_r($location_id);
+$location_id = $stmt->fetch(PDO::FETCH_ASSOC)["location_id"];
+echo "Location_id : " . $location_id . ";\n";
 
 $package = array(
     "latitude" => 42.67247,
     "longitude" => -83.20762
 );
 
-echo "Y\n";
 $sql = "select location_id from location where upperlat >= :latitude and lowerlat < :latitude and upperlng >= :longitude and lowerlng < :longitude";
-echo "Z\n";
 $stmt = $db->prepare($sql);
-echo "A\n";
 $stmt->execute($package);
-echo "B\n";
 $location_id = $stmt->fetch(PDO::FETCH_ASSOC)["location_id"];
-echo "\n" . $location_id . "\n";
+echo "Location_id : " . $location_id . ";\n";
