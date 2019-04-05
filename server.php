@@ -99,6 +99,10 @@ while(true) {
              $stmt->execute($canbus);
              echo "Package: " . print_r($canbus, true);
 
+             $sql = "select location_id from location where upperlat <= :latitude and lowerlat >= :latitude and upperlng <= :longitude and lowerlng >= :longitude";
+             $stmt = $db->prepare($sql);
+             $stmt->execute();
+
              //Respond
              foreach ($clients as $send_socket) {
                  if ($send_socket == $socket) {
