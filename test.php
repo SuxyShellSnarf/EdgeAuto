@@ -98,4 +98,4 @@ $sql = "select location_id from location where upperlat <= :latitude and lowerla
 $stmt = $db->prepare($sql);
 $stmt->execute($package);
 $location_id = $stmt->fetch(PDO::FETCH_ASSOC);
-echo "Here is a location id : " . print_r($location_id, true) .";\n";
+echo "Here is a location id : " . print_r($location_id) .";\n";
