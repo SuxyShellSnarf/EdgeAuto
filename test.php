@@ -98,6 +98,7 @@ $package = array(
 );
 
 $sql = "select location_id from location where upperlat >= :latitude and lowerlat < :latitude and upperlng >= :longitude and lowerlng < :longitude";
+echo "Z\n";
 $stmt = $db->prepare($sql);
 echo "A\n";
 $stmt->execute($package);
