@@ -15,7 +15,7 @@ $decrement = 0.3;
 $y = 180;
 $latitude = array();
 $longitude = array();
-
+/*
 while ($x >= -90) {
     $package = array(
         "lat" => $x
@@ -58,7 +58,7 @@ while ($latcounter < count($latitude) - 1) {
     }
     $latcounter++;
 }
-
+*/
 $package = array(
     "latitude" => 42.67831,
     "longitude" => -83.21423
