@@ -20,25 +20,15 @@ foreign key (user_id) references user(user_id)
 create table vm (
 vm_id int unsigned auto_increment primary key,
 ip_address tinytext not null,
-location_id int unsigned,
+location_id int unsigned unique,
 foreign key (location_id) references location(location_id)
 );
 
 -- This is the normalized gps boundaries for a vm, this is what vm is referencing
 create table location (
 location_id int unsigned auto_increment primary key,
-b_boundary int,
-l_boundary int,
-r_boundary int,
-t_boundary int,
-foreign key (b_boundary) references gps(gps_id),
-foreign key (l_boundary) references gps(gps_id),
-foreign key (r_boundary) references gps(gps_id),
-foreign key (t_boundary) references gps(gps_id)
-);
-
--- This is where the gps data actually lies and will be used to determine the approximate location of a user
-create table gps (
-gps_id int unsigned auto_increment primary key,
-boundary int
+upperlat float,
+lowerlat float,
+upperlng float,
+lowerlng float
 );

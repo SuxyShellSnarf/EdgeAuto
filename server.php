@@ -61,37 +61,6 @@ while(true) {
 
              $canbusdump = explode(",", $message[0]);
 
-
-             /**
-             $lat = explode(".", $message[2]);
-             $lng = explode(".", $message[3]);
-
-             $gps_lat = array(
-                 "gps_degree" => $lat[0],
-                 "gps_minute" => substr($lat[1], 0, 2),
-                 "gps_decimals" => substr($lab[1], 2)
-             );
-
-             $gps_lng = array(
-                "gps_degree" => $lng[0],
-                "gps_minute" => substr($lng[1], 0, 2),
-                "gps_decimals" => substr($lng[1], 2)
-             );
-              if ($lng < -83.220059) {
-                 echo "Out of range";
-             } else if ($lng < -83.206406) {
-                 if ($lat < 42.665945) {
-                     echo "Out of range";
-                 } else if ($lat < 42.673340) {
-                     echo "Success!";
-                 } else if ($lat < 42.679222) {
-                     echo "Success!";
-                 } else {
-                     echo "Out of range";
-                 }
-             } else {
-                 echo "Out of range";
-             }*/
             if (count($canbusdump) == 1) {
                 $canbus = array(
                     "cantime" => $canbusdump[0],
@@ -129,6 +98,18 @@ while(true) {
              $stmt = $db->prepare($sql);
              $stmt->execute($canbus);
              echo "Package: " . print_r($canbus, true);
+
+             if (count($canbus) == 5) {
+                 $sql = "select location_id from location where upperlat >= :latitude and lowerlat < :latitude and upperlng >= :longitude and lowerlng < :longitude";
+                 $stmt = $db->prepare($sql);
+                 $stmt->execute($canbus);
+                 $location_id = $stmt->fetch(PDO::FETCH_ASSOC)["location_id"];
+                 $sql = "select ip_address from vm where location_id = ?";
+                 $sql->bindValue(1, $location_id, PDO::PARAM_INT);
+                 $stmt->execute($canbus);
+                 $ip_address = $stmt->fetch(PDO::FETCH_ASSOC)["ip_address"];
+                 echo "IP Address : " . $ip_address . ";\n";
+             }
 
              //Respond
              foreach ($clients as $send_socket) {
