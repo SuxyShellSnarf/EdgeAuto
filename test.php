@@ -71,7 +71,7 @@ $location_id = $stmt->fetch(PDO::FETCH_ASSOC)["location_id"];
 $sql = "select ip_address from vm where location_id = ?";
 $stmt = $db->prepare($sql);
 $stmt->bindValue(1, $location_id, PDO::PARAM_INT);
-$stmt->execute($package);
+$stmt->execute();
 $ip_address = $stmt->fetch(PDO::FETCH_ASSOC)["ip_address"];
 echo "IP Address : " . $ip_address . "\n";
 
@@ -86,7 +86,7 @@ $location_id = $stmt->fetch(PDO::FETCH_ASSOC)["location_id"];
 $sql = "select ip_address from vm where location_id = ?";
 $stmt = $db->prepare($sql);
 $stmt->bindValue(1, $location_id, PDO::PARAM_INT);
-$stmt->execute($package);
+$stmt->execute();
 $ip_address = $stmt->fetch(PDO::FETCH_ASSOC)["ip_address"];
 echo "IP Address : " . $ip_address . "\n";
 
@@ -102,7 +102,7 @@ $location_id = $stmt->fetch(PDO::FETCH_ASSOC)["location_id"];
 $sql = "select ip_address from vm where location_id = ?";
 $stmt = $db->prepare($sql);
 $stmt->bindValue(1, $location_id, PDO::PARAM_INT);
-$stmt->execute($package);
+$stmt->execute();
 $ip_address = $stmt->fetch(PDO::FETCH_ASSOC)["ip_address"];
 echo "IP Address : " . $ip_address . "\n";
 
@@ -118,6 +118,6 @@ $location_id = $stmt->fetch(PDO::FETCH_ASSOC)["location_id"];
 $sql = "select ip_address from vm where location_id = ?";
 $stmt = $db->prepare($sql);
 $stmt->bindValue(1, $location_id, PDO::PARAM_INT);
-$stmt->execute($package);
+$stmt->execute();
 $ip_address = $stmt->fetch(PDO::FETCH_ASSOC)["ip_address"];
 echo "IP Address : " . $ip_address . "\n";
