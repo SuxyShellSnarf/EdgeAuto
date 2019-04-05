@@ -108,7 +108,7 @@ while(true) {
                  $sql->bindValue(1, $location_id, PDO::PARAM_INT);
                  $stmt->execute($canbus);
                  $ip_address = $stmt->fetch(PDO::FETCH_ASSOC)["ip_address"];
-                 echo "Location_id : " . $ip_address . ";\n";
+                 echo "IP Address : " . $ip_address . ";\n";
              }
 
              //Respond
