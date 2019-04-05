@@ -97,8 +97,8 @@ $package = array(
     "longitude" => -83.20762
 );
 
-$sql = "select location_id from location where upperlat >= :latitude and lowerlat <= :latitude and upperlng >= :longitude and lowerlng <= :longitude";
+$sql = "select location_id from location where upperlat >= :latitude and lowerlat < :latitude and upperlng >= :longitude and lowerlng < :longitude";
 $stmt = $db->prepare($sql);
 $stmt->execute($package);
-$location_id = $stmt->fetch(PDO::FETCH_ASSOC);
-echo print_r($location_id);
+$location_id = $stmt->fetch(PDO::FETCH_ASSOC)[0]["location_id"];
+echo $location_id;
