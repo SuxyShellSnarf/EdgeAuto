@@ -69,23 +69,26 @@ $stmt = $db->prepare($sql);
 $stmt->execute($package);
 $location_id = $stmt->fetch(PDO::FETCH_ASSOC)["location_id"];
 $sql = "select ip_address from vm where location_id = ?";
-$sql->bindValue(1, $location_id);
+$stmt = $db->prepare($sql);
+$stmt->bindValue(1, $location_id, PDO::PARAM_INT);
 $stmt->execute($package);
 $ip_address = $stmt->fetch(PDO::FETCH_ASSOC)["ip_address"];
+echo "IP Address : " . $ip_address . "\n";
 
 $package = array(
     "latitude" => 42.67885,
     "longitude" => -83.20917
 );
-
 $sql = "select location_id from location where upperlat >= :latitude and lowerlat < :latitude and upperlng >= :longitude and lowerlng < :longitude";
 $stmt = $db->prepare($sql);
 $stmt->execute($package);
 $location_id = $stmt->fetch(PDO::FETCH_ASSOC)["location_id"];
 $sql = "select ip_address from vm where location_id = ?";
-$sql->bindValue(1, $location_id, PDO::PARAM_INT);
+$stmt = $db->prepare($sql);
+$stmt->bindValue(1, $location_id, PDO::PARAM_INT);
 $stmt->execute($package);
 $ip_address = $stmt->fetch(PDO::FETCH_ASSOC)["ip_address"];
+echo "IP Address : " . $ip_address . "\n";
 
 $package = array(
     "latitude" => 42.67298,
@@ -97,9 +100,11 @@ $stmt = $db->prepare($sql);
 $stmt->execute($package);
 $location_id = $stmt->fetch(PDO::FETCH_ASSOC)["location_id"];
 $sql = "select ip_address from vm where location_id = ?";
-$sql->bindValue(1, $location_id, PDO::PARAM_INT);
+$stmt = $db->prepare($sql);
+$stmt->bindValue(1, $location_id, PDO::PARAM_INT);
 $stmt->execute($package);
 $ip_address = $stmt->fetch(PDO::FETCH_ASSOC)["ip_address"];
+echo "IP Address : " . $ip_address . "\n";
 
 $package = array(
     "latitude" => 42.67247,
@@ -111,6 +116,8 @@ $stmt = $db->prepare($sql);
 $stmt->execute($package);
 $location_id = $stmt->fetch(PDO::FETCH_ASSOC)["location_id"];
 $sql = "select ip_address from vm where location_id = ?";
-$sql->bindValue(1, $location_id, PDO::PARAM_INT);
+$stmt = $db->prepare($sql);
+$stmt->bindValue(1, $location_id, PDO::PARAM_INT);
 $stmt->execute($package);
 $ip_address = $stmt->fetch(PDO::FETCH_ASSOC)["ip_address"];
+echo "IP Address : " . $ip_address . "\n";
