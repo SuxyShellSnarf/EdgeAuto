@@ -11,6 +11,6 @@ $db = new PDO("mysql:host=localhost;dbname=EdgeAuto", "edgeauto", "edgeauto19!")
 $sql = "select * from message where session_id = 1;";
 $stmt = $db->prepare($sql);
 $stmt->execute();
-$data = $stmt->fetch(PDO::FETCH_ASSOC);
-
+$datas = $stmt->fetch(PDO::FETCH_ASSOC);
+while($data = $datas->fetch(PDO::FETCH_ASSOC))
 echo print_r($data, true);
