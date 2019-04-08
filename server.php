@@ -55,7 +55,7 @@ while(true) {
         //If there is data, proceed
         if (!empty($data)) {
              echo "Data sent {$data}\n";
-
+             $message = array();
              //Break down the message into parts : user_id, message, lat, lng
              $message = explode(";", $data);
 
