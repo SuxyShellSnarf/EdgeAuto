@@ -10,17 +10,17 @@ Carloop<CarloopRevision2> carloop;
 TinyGPSPlus gps;
 
 TCPClient client;
-byte server[] = { 35, 185, 99, 21};
-//byte server2[] = { 104, 196, 99, 233 };
+//byte server[] = { 35, 185, 99, 21};
+byte server[] = { 35, 237, 136, 160 };
 
 bool toggle = false;
 
 void setup() {
     Time.zone(-4);
     WiFi.on();
-    WiFiCredentials credentials("Samsung Galaxy Note8 5908", WPA2);
+    WiFiCredentials credentials("Lucas's iPhone", WPA2);
 
-    credentials.setPassword("12345678");
+    credentials.setPassword("mrsaxy10");
     credentials.setCipher(WLAN_CIPHER_AES);
 
     WiFi.setCredentials(credentials);
@@ -36,6 +36,7 @@ int counter = 0;
 String backlog[500];
 
 void loop() {
+    Particle.publish("Its still working.", PUBLIC);
     /*
     if (counter < 400) {
         backlog[counter] = counter;
@@ -149,12 +150,12 @@ void loop() {
         package.concat(";1");
         client.write(package);*
     }/
-
-    /*String response = "";
+*/
+    String response = "";
     while (client.available()) {
         char c = client.read();
         response.concat(c);
-    }*/
+    }
 
     /*if (counter == 15) {
         if (!toggle) {
@@ -170,4 +171,8 @@ void loop() {
     } else {
         counter++;
     }*/
+    if (!client.connected()) {
+        client.connect(server, 8001);
+    }
+    delay(500);
 }
