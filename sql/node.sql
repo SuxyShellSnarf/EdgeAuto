@@ -11,9 +11,7 @@ arb_id int unsigned,
 message varchar(255),
 latitude float,
 longitude float,
-cantime varchar(255),
-user_id int unsigned,
-foreign key (user_id) references user(user_id)
+cantime bigint unsigned
 );
 
 -- This will act as a directory for vm lookup to switch easily between vms
