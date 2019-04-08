@@ -57,9 +57,31 @@ while(true) {
              echo "Data sent {$data}\n";
 
              //Break down the message into parts : user_id, message, lat, lng
-             //$message = explode(";", $data);
+             $message = explode(";", $data);
 
-             $canbusdump = explode(",", $data);
+             if (count($message) > 0) {
+                 $counter = 0;
+                 while ($counter < count($message)) {
+                     $canbusdump = explode(",", $message[$counter]);
+
+                     if (count($canbusdump) == 5) {
+                         $canbus = array(
+                             "arb_id" => $canbusdump[0],
+                             "message" => $canbusdump[1],
+                             "latitude" => $canbusdump[2],
+                             "longitude" => $canbusdump[3],
+                             "cantime" => $canbusdump[4]
+                         );
+                         $sql = "INSERT INTO message (arb_id, message, latitude, longitude, cantime) values (:arb_id, :message, :latitude, :longitude, :cantime)";
+                         //Add this information!
+                         $stmt = $db->prepare($sql);
+                         $stmt->execute($canbus);
+                         echo "Package: " . print_r($canbus, true);
+                     }
+                     $counter++;
+                 }
+             }
+
 
             /*if (count($canbusdump) == 1) {
                 $canbus = array(
@@ -82,7 +104,7 @@ while(true) {
                     "user_id" => $message[1]
                 );
                 $sql = "INSERT INTO message (arb_id, message, cantime, user_id) values (:arb_id, :message, :cantime, :user_id)";
-            } */if (count($canbusdump) == 5) {
+            } if (count($canbusdump) == 5) {
                 $canbus = array(
                     "arb_id" => $canbusdump[0],
                     "message" => $canbusdump[1],
@@ -96,10 +118,7 @@ while(true) {
                 $stmt->execute($canbus);
                 echo "Package: " . print_r($canbus, true);
             }
-
-
-
-             /*if (count($canbus) == 5) {
+            if (count($canbus) == 5) {
                  $sql = "select location_id from location where upperlat >= :latitude and lowerlat < :latitude and upperlng >= :longitude and lowerlng < :longitude";
                  $stmt = $db->prepare($sql);
                  $stmt->execute($canbus);

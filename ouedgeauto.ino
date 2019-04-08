@@ -81,10 +81,10 @@ void loop() {
     if (gpsValid) {
         float lat = carloop.gps().location.lat();
         float lng = carloop.gps().location.lng();
-        if (lat < 42.839807) {
+        /*if (lat < 42.839807) {
             client.stop();
             client.connect(server2, 8001);
-        }
+        }*/
         String gps = "";
         String package = "";
 
@@ -106,7 +106,8 @@ void loop() {
         }
         package.concat(gps);
         package.concat(",");
-        package.concat(Time.millis());
+        package.concat(millis());
+        package.conate(";");
 
         if (client.connected()) {
             /*if (counter > 0) {
