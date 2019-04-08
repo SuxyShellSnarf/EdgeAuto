@@ -8,9 +8,9 @@
 
 $db = new PDO("mysql:host=localhost;dbname=EdgeAuto", "edgeauto", "edgeauto19!");
 
-$file = fopen("session3.csv", "w");
+$file = fopen("session4.csv", "w");
 
-$sql = "select * from message where session_id = 3;";
+$sql = "select * from message where session_id = 4;";
 $stmt = $db->prepare($sql);
 $stmt->execute();
 $results = array();
