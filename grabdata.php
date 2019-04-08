@@ -8,7 +8,7 @@
 
 $db = new PDO("mysql:host=localhost;dbname=EdgeAuto", "edgeauto", "edgeauto19!");
 
-$file = "session1.txt";
+$file = fopen("session1.csv", "w");
 
 $sql = "select * from message where session_id = 1;";
 $stmt = $db->prepare($sql);
