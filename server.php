@@ -91,12 +91,13 @@ while(true) {
                     "cantime" => $canbusdump[4]
                 );
                 $sql = "INSERT INTO message (arb_id, message, latitude, longitude, cantime) values (:arb_id, :message, :latitude, :longitude, :cantime)";
+                //Add this information!
+                $stmt = $db->prepare($sql);
+                $stmt->execute($canbus);
+                echo "Package: " . print_r($canbus, true);
             }
 
-             //Add this information!
-             $stmt = $db->prepare($sql);
-             $stmt->execute($canbus);
-             echo "Package: " . print_r($canbus, true);
+
 
              /*if (count($canbus) == 5) {
                  $sql = "select location_id from location where upperlat >= :latitude and lowerlat < :latitude and upperlng >= :longitude and lowerlng < :longitude";
