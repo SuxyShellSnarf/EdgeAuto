@@ -16,5 +16,5 @@ $stmt->execute();
 $results = array();
 while($data = $stmt->fetch(PDO::FETCH_ASSOC)) {
     $string = $data["message_id"] . "," . $data["created"] . "," . $data["arb_id"] . "," . $data["message"] . "," . $data["latitude"] . "," . $data["longitude"] . "," . $data["cantime"] . "," . $data["session_id"];
-    fputcsv($file, $string);
+    fputcsv($file, $data);
 }
