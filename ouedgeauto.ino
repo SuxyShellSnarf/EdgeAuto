@@ -107,7 +107,7 @@ void loop() {
         package.concat(gps);
         package.concat(",");
         package.concat(millis());
-        package.conate(";");
+        package.concat(";");
 
         if (client.connected()) {
             /*if (counter > 0) {
@@ -124,12 +124,13 @@ void loop() {
             client.write(package);
             Particle.publish(package, PUBLIC);
         } else {
-            backlog[counter] = package;
-            counter++;
+            client.connect(server, 8001);
+            client.write(package);
+            Particle.publish(package, PUBLIC);
         }
-    } else {
+    } /*else {
         //Particle.publish("INVALID~GPS", PUBLIC);
-        /*
+
         CANMessage message;
         String Canmessage = "";
         String package = "";
@@ -146,8 +147,8 @@ void loop() {
         package.concat(Time.timeStr());
         Particle.publish(Time.timeStr());
         package.concat(";1");
-        client.write(package);*/
-    }
+        client.write(package);*
+    }/
 
     /*String response = "";
     while (client.available()) {
