@@ -10,8 +10,8 @@ Carloop<CarloopRevision2> carloop;
 TinyGPSPlus gps;
 
 TCPClient client;
-byte server[] = { 35, 237, 136, 160};
-byte server2[] = { 104, 196, 99, 233 };
+byte server[] = { 35, 185, 99, 21};
+//byte server2[] = { 104, 196, 99, 233 };
 
 bool toggle = false;
 
@@ -106,8 +106,7 @@ void loop() {
         }
         package.concat(gps);
         package.concat(",");
-        package.concat(Time.timeStr());
-        package.concat(";1");
+        package.concat(Time.millis());
 
         if (client.connected()) {
             /*if (counter > 0) {
@@ -129,6 +128,7 @@ void loop() {
         }
     } else {
         //Particle.publish("INVALID~GPS", PUBLIC);
+        /*
         CANMessage message;
         String Canmessage = "";
         String package = "";
@@ -145,14 +145,14 @@ void loop() {
         package.concat(Time.timeStr());
         Particle.publish(Time.timeStr());
         package.concat(";1");
-        client.write(package);
+        client.write(package);*/
     }
 
-    String response = "";
+    /*String response = "";
     while (client.available()) {
         char c = client.read();
         response.concat(c);
-    }
+    }*/
 
     /*if (counter == 15) {
         if (!toggle) {
