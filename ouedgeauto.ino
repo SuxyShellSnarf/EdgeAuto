@@ -170,6 +170,4 @@ void loop() {
     } else {
         counter++;
     }*/
-
-    delay(1000);
 }
