@@ -66,7 +66,7 @@ while(true) {
                          $stmt = $db->prepare($sql);
                          $stmt->execute();
                          $id = $db->lastInsertId();
-                         echo $id;
+                         echo $id . "\n";
                      } else if ($message[$counter] != "") {
                          $gpsMapping = explode(",", $message[$counter]);
                          $gps = array(

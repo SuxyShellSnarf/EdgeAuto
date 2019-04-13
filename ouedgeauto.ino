@@ -84,26 +84,27 @@ void loop() {
             }
         }
     } else {
-        Particle.publish("INVALID~GPS", PUBLIC);
+        //Particle.publish("INVALID~GPS", PUBLIC);
 
-        String pack = "";
-        pack.concat(session_id);
-        pack.concat(";");
+        if (session_id == -1) {
+            String pack = "";
+            pack.concat(session_id);
+            pack.concat(";");
 
-        client.write(pack);
-        delay(2000);
-
-        CANMessage message;
+            client.write(pack);
+            delay(2000);
+            String response = "";
+            while (client.available()) {
+                char c = client.read();
+                response.concat(c);
+            }
+            Particle.publish(response, PUBLIC);
+            session_id = stoi(response);
+        }
     }
 
-    String response = "";
-    while (client.available()) {
-        char c = client.read();
-        response.concat(c);
-    }
-
-    if (!client.connected()) {
+    /*if (!client.connected()) {
         client.connect(mappingServer, 8001);
-    }
+    }*/
     //delay(50);
 }
