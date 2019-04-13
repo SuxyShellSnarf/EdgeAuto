@@ -29,10 +29,15 @@ void setup() {
     WiFi.connect();
 
     client.connect(mappingServer, 8001);
+    String response = "";
+    while (client.available()) {
+        char c = client.read();
+        response.concat(c);
+    }
     waitFor(WiFi.ready, 1000);
 
     carloop.begin();
-    Particle.publish("Begin", PUBLIC);
+    Particle.publish(response, PUBLIC);
 }
 
 void loop() {
@@ -99,7 +104,7 @@ void loop() {
                 response.concat(c);
             }
             Particle.publish(response, PUBLIC);
-            session_id = stoi(response);
+            session_id = response.toInt();
         }
     }
 
