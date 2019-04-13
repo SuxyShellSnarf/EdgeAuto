@@ -68,17 +68,12 @@ while(true) {
                          $id = $db->lastInsertId();
                          echo $id . "\n";
                          socket_write($read_socket, $id);
-                     } else if ($message[$counter] == "Give me ip") {
-
                      } else if ($message[$counter] != "") {
                          $gpsMapping = explode(",", $message[$counter]);
-                         echo "GPS mapping : " . print_r($gpsMapping, true) . "\n";
                          $gps = array(
                              "latitude" => $gpsMapping[0],
                              "longitude" => $gpsMapping[1]
                          );
-
-                         echo "GPS : " . print_r($gps, true);
 
                          $sql = "select location_id from location where upperlat >= :latitude and lowerlat < :latitude and upperlng >= :longitude and lowerlng < :longitude";
                          $stmt = $db->prepare($sql);
