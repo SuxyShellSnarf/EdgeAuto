@@ -11,6 +11,7 @@ TinyGPSPlus gps;
 
 TCPClient client;
 byte mappingServer[] = { 35, 237, 136, 160 };
+byte server[4] = {};
 String tag = "";
 bool mapped = false;
 int counter = 0;
@@ -37,7 +38,7 @@ void setup() {
     waitFor(WiFi.ready, 1000);
 
     carloop.begin();
-    Particle.publish(response, PUBLIC);
+    Particle.publish("Begin", PUBLIC);
 }
 
 void loop() {
@@ -93,8 +94,7 @@ void loop() {
 
         if (session_id == -1) {
             String pack = "";
-            pack.concat(session_id);
-            pack.concat(";");
+            pack.concat(session_id + ";");
 
             client.write(pack);
             delay(500);
@@ -109,14 +109,36 @@ void loop() {
             String package = "42.8,-83.5";
             client.write(package);
 
+            delay(500);
+
             String response = "";
+            counter = 0;
             while (client.available()) {
                 char c = client.read();
-                response.concat(c);
+                if (c == '.') {
+                    unsigned int value = response.toInt();
+                    server[counter] = value;
+
+                    response = "";
+                    counter++;
+                } else {
+                    response.concat(c);
+                }
             }
+
+            delay(1000);
+            Particle.publish(String(server[0]), PUBLIC);
+            delay(1000);
+            Particle.publish(String(server[1]), PUBLIC);
+            delay(1000);
+            Particle.publish(String(server[2]), PUBLIC);
+            delay(1000);
+            Particle.publish(String(server[3]), PUBLIC);
+
+
             client.stop();
             delay(4000);
-            client.connect(response, 8001);
+            client.connect(server, 8001);
             if (client.connected()) {
                 Particle.publish("WOO", PUBLIC);
             }
@@ -126,5 +148,4 @@ void loop() {
     /*if (!client.connected()) {
         client.connect(mappingServer, 8001);
     }*/
-    delay(3000);
 }

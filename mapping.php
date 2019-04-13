@@ -93,6 +93,8 @@ while(true) {
 
                          echo "ip address : " . $ip_address . "\n";
 
+                         $ip_address .= ";";
+
                          socket_write($read_socket, $ip_address);
                      }
 
