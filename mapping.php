@@ -31,7 +31,7 @@ while(true) {
      if (in_array($socket, $read)) {
          $clients[] = $newsocket = socket_accept($socket);
          socket_getpeername($newsocket, $ip, $host);
-         socket_write($newsocket, "There are " . (count($clients) - 1) . "client(s) connected to the server\n");
+         //socket_write($newsocket, "There are " . (count($clients) - 1) . "client(s) connected to the server\n");
          echo "New client connected: {$ip}\n";
          $key = array_search($socket, $read);
          unset($read[$key]);
