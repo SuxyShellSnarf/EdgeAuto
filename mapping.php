@@ -88,8 +88,8 @@ while(true) {
                          $sql2 = "select ip_address from node where location_id = ?";
                          $stmt2 = $db->prepare($sql2);
                          $stmt2->bindValue(1, $location_id, PDO::PARAM_INT);
-                         $ip_address = $stmt->fetch(PDO::FETCH_ASSOC)["ip_address"];
                          $stmt2->execute();
+                         $ip_address = $stmt->fetch(PDO::FETCH_ASSOC)["ip_address"];
 
                          echo "ip address : " . $ip_address . "\n";
 
