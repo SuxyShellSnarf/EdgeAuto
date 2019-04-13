@@ -72,15 +72,19 @@ while(true) {
 
                      } else if ($message[$counter] != "") {
                          $gpsMapping = explode(",", $message[$counter]);
+                         echo "GPS mapping : " . print_r($gpsMapping, true) . "\n";
                          $gps = array(
                              "latitude" => $gpsMapping[0],
                              "longitude" => $gpsMapping[1]
                          );
 
+                         echo "GPS : " . print_r($gps, true);
+
                          $sql = "select location_id from location where upperlat >= :latitude and lowerlat < :latitude and upperlng >= :longitude and lowerlng < :longitude";
                          $stmt = $db->prepare($sql);
                          $stmt->execute($gps);
                          $location_id = $stmt->fetch(PDO::FETCH_ASSOC)["location_id"];
+                         echo "location_id : " . $location_id . "\n";
                          $sql2 = "select ip_address from node where location_id = ?";
                          $stmt2 = $db->prepare($sql2);
                          $stmt2->bindValue(1, $location_id, PDO::PARAM_INT);
