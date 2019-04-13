@@ -71,7 +71,7 @@ while(true) {
                              "id" => $id,
                              "message" => "Test"
                          );
-                         socket_write($read_socket, $package);
+                         socket_write($read_socket, print_r($package, true));
                      } else if ($message[$counter] != "") {
                          $gpsMapping = explode(",", $message[$counter]);
                          $gps = array(
