@@ -97,7 +97,7 @@ void loop() {
             pack.concat(";");
 
             client.write(pack);
-            delay(2000);
+            delay(500);
             String response = "";
             while (client.available()) {
                 char c = client.read();
@@ -111,5 +111,5 @@ void loop() {
     /*if (!client.connected()) {
         client.connect(mappingServer, 8001);
     }*/
-    //delay(50);
+    delay(3000);
 }

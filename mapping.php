@@ -19,6 +19,7 @@ socket_listen($socket, 3) or die("Could not set up socket listener");
 $clients = array($socket);
 
 while(true) {
+     echo "loop";
      $read = $clients;
      $write = null;
      $except = null;
@@ -72,6 +73,8 @@ while(true) {
                              "message" => "Test"
                          );
                          socket_write($read_socket, print_r($package, true));
+                     } else if ($message[$counter] == "Give me ip") {
+
                      } else if ($message[$counter] != "") {
                          $gpsMapping = explode(",", $message[$counter]);
                          $gps = array(
@@ -98,40 +101,13 @@ while(true) {
                  }
              }
 
-             /*
-             if (count($message) > 0) {
-                 $counter = 0;
-                 while ($counter < count($message)) {
-                     if ($message[$counter] != "") {
-                         $canbusdump = explode(",", $message[$counter]);
-
-                         if (count($canbusdump) == 5) {
-                             $canbus = array(
-                                 "arb_id" => $canbusdump[0],
-                                 "message" => $canbusdump[1],
-                                 "latitude" => $canbusdump[2],
-                                 "longitude" => $canbusdump[3],
-                                 "cantime" => $canbusdump[4]
-                             );
-                             $sql = "INSERT INTO message (arb_id, message, latitude, longitude, cantime) values (:arb_id, :message, :latitude, :longitude, :cantime)";
-                             //Add this information!
-                             $stmt = $db->prepare($sql);
-                             $stmt->execute($canbus);
-                             echo "Package: " . print_r($canbus, true);
-                         }
-                     }
-                     
-                     $counter++;
-                 }
-             }
-*/
              //Respond
              foreach ($clients as $send_socket) {
                  if ($send_socket == $socket) {
                      continue;
                  }
                 echo "SEND SOCKET: " . $send_socket . "\n";
-                 socket_write($send_socket, $data);
+                 socket_write($send_socket, $response);
              }
          }
      }
