@@ -1,5 +1,4 @@
-insert into location (upperlat, lowerlat, upperlng, lowerlng) values (42.68, 42.674, -83.205, -83.2125);
-insert into location (upperlat, lowerlat, upperlng, lowerlng) values (42.68, 42.674, -83.2125, -83.22);
-insert into location (upperlat, lowerlat, upperlng, lowerlng) values (42.674, 42.668, -83.205, -83.2125);
-insert into location (upperlat, lowerlat, upperlng, lowerlng) values (42.674, 42.668, -83.2125, -83.22);
-
+insert into vm (ip_address, location_id) values ("34.73.140.248", 1);
+insert into vm (ip_address, location_id) values ("35.231.184.101", 2);
+insert into vm (ip_address, location_id) values ("35.196.49.40", 3);
+insert into vm (ip_address, location_id) values ("35.237.6.157", 4);
