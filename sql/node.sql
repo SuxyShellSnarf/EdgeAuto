@@ -25,8 +25,8 @@ lowerlng float
 );
 
 -- This will act as a directory for vm lookup to switch easily between vms
-create table vm (
-vm_id int unsigned auto_increment primary key,
+create table node (
+node_id int unsigned auto_increment primary key,
 ip_address tinytext not null,
 location_id int unsigned unique,
 foreign key (location_id) references location(location_id)

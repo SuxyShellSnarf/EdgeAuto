@@ -1,13 +1,11 @@
 <?php
 //First initialize the database information
-//$host = "10.142.0.4";
-//$host = "10.142.0.7";
+$host = "";
 $port = 8001;
 
 $db = new PDO("mysql:host=localhost;dbname=EdgeAuto", "edgeauto", "edgeauto19!");
 
 set_time_limit(0);
-
 ob_implicit_flush();
 
 //Create the original socket
@@ -84,54 +82,6 @@ while(true) {
                      $counter++;
                  }
              }
-
-
-            /*if (count($canbusdump) == 1) {
-                $canbus = array(
-                    "cantime" => $canbusdump[0],
-                    "user_id" => $message[1]
-                );
-                $sql = "INSERT INTO message (cantime, user_id) values (:cantime, :user_id)";
-            } else if (count($canbusdump) == 2) {
-                $canbus = array(
-                    "arb_id" => $canbusdump[0],
-                    "message" => $canbusdump[1],
-                    "user_id" => $message[1]
-                );
-                $sql = "INSERT INTO message (arb_id, message, user_id) values (:arb_id, :message, :user_id)";
-            } else if (count($canbusdump) == 3) {
-                $canbus = array(
-                    "arb_id" => $canbusdump[0],
-                    "message" => $canbusdump[1],
-                    "cantime" => $canbusdump[2],
-                    "user_id" => $message[1]
-                );
-                $sql = "INSERT INTO message (arb_id, message, cantime, user_id) values (:arb_id, :message, :cantime, :user_id)";
-            } if (count($canbusdump) == 5) {
-                $canbus = array(
-                    "arb_id" => $canbusdump[0],
-                    "message" => $canbusdump[1],
-                    "latitude" => $canbusdump[2],
-                    "longitude" => $canbusdump[3],
-                    "cantime" => $canbusdump[4]
-                );
-                $sql = "INSERT INTO message (arb_id, message, latitude, longitude, cantime) values (:arb_id, :message, :latitude, :longitude, :cantime)";
-                //Add this information!
-                $stmt = $db->prepare($sql);
-                $stmt->execute($canbus);
-                echo "Package: " . print_r($canbus, true);
-            }
-            if (count($canbus) == 5) {
-                 $sql = "select location_id from location where upperlat >= :latitude and lowerlat < :latitude and upperlng >= :longitude and lowerlng < :longitude";
-                 $stmt = $db->prepare($sql);
-                 $stmt->execute($canbus);
-                 $location_id = $stmt->fetch(PDO::FETCH_ASSOC)["location_id"];
-                 $sql = "select ip_address from vm where location_id = ?";
-                 $sql->bindValue(1, $location_id, PDO::PARAM_INT);
-                 $stmt->execute($canbus);
-                 $ip_address = $stmt->fetch(PDO::FETCH_ASSOC)["ip_address"];
-                 echo "IP Address : " . $ip_address . ";\n";
-             }*/
 
              //Respond
              foreach ($clients as $send_socket) {
