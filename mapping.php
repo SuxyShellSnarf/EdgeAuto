@@ -19,7 +19,6 @@ socket_listen($socket, 3) or die("Could not set up socket listener");
 $clients = array($socket);
 
 while(true) {
-     echo "loop";
      $read = $clients;
      $write = null;
      $except = null;
@@ -68,11 +67,7 @@ while(true) {
                          $stmt->execute();
                          $id = $db->lastInsertId();
                          echo $id . "\n";
-                         $package = array(
-                             "id" => $id,
-                             "message" => "Test"
-                         );
-                         socket_write($read_socket, print_r($package, true));
+                         socket_write($read_socket, $id);
                      } else if ($message[$counter] == "Give me ip") {
 
                      } else if ($message[$counter] != "") {
@@ -107,7 +102,7 @@ while(true) {
                      continue;
                  }
                 echo "SEND SOCKET: " . $send_socket . "\n";
-                 socket_write($send_socket, $response);
+                 //socket_write($send_socket, $response);
              }
          }
      }

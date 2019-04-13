@@ -105,6 +105,21 @@ void loop() {
             }
             Particle.publish(response, PUBLIC);
             session_id = response.toInt();
+        } else {
+            String package = "42.8,-83.5";
+            client.write(package);
+
+            String response = "";
+            while (client.available()) {
+                char c = client.read();
+                response.concat(c);
+            }
+            client.stop();
+            delay(4000);
+            client.connect(response, 8001);
+            if (client.connected()) {
+                Particle.publish("WOO", PUBLIC);
+            }
         }
     }
 
