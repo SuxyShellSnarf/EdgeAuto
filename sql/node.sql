@@ -7,11 +7,12 @@ user_id int unsigned auto_increment primary key
 create table message (
 message_id int unsigned auto_increment primary key,
 created datetime default CURRENT_TIMESTAMP,
-arb_id int unsigned,
-message varchar(255),
+arb_id int varchar(16),
+message varchar(64),
 latitude float,
 longitude float,
-cantime bigint unsigned
+cantime bigint unsigned,
+session_id int unsigned
 );
 
 -- This is the normalized gps boundaries for a vm, this is what vm is referencing

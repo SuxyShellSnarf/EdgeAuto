@@ -10,10 +10,12 @@ Carloop<CarloopRevision2> carloop;
 TinyGPSPlus gps;
 
 TCPClient client;
-//byte server[] = { 35, 185, 99, 21};
-byte server[] = { 35, 237, 136, 160 };
-
-bool toggle = false;
+byte mappingServer[] = { 35, 237, 136, 160 };
+String tag = "";
+bool mapped = false;
+int counter = 0;
+int session_id = -1;
+String backlog[500];
 
 void setup() {
     Time.zone(-4);
@@ -26,153 +28,75 @@ void setup() {
     WiFi.setCredentials(credentials);
     WiFi.connect();
 
-    client.connect(server, 8001);
+    client.connect(mappingServer, 8001);
     waitFor(WiFi.ready, 1000);
 
     carloop.begin();
+    Particle.publish("Begin", PUBLIC);
 }
 
-int counter = 0;
-String backlog[500];
-
 void loop() {
-    Particle.publish("Its still working.", PUBLIC);
-    /*
-    if (counter < 400) {
-        backlog[counter] = counter;
-        counter++;
-    } else {
-        int tCounter = 0;
-        while (tCounter < counter){
-            String package = "";
-            package.concat(backlog[tCounter]);
-            package.concat(";1");
-            client.write(package);
-            tCounter++;
-            delay(200);
-        }
-        counter = 0;
-    }*/
     carloop.update();
-
-    /*
-    if (client.connected()) {
-        String package = "ID = ";
-        CANMessage message;
-        String Canmessage = "";
-
-        if (carloop.can().receive(message)) {
-            package.concat(message.id);
-            package.concat(", MESSAGE = ");
-            for (int i = 0; i < message.len; i++) {
-                Canmessage.concat(message.data[i]);
-            }
-            package.concat(Canmessage);
-            package.concat(", ");
-            package.concat(", TIME = ");
-            package.concat(Time.timeStr());
-            package.concat(";1");
-        }
-        client.write(package);
-        Particle.publish(package, PUBLIC);
-    }*/
-
     bool gpsValid = carloop.gps().location.isValid();
 
     if (gpsValid) {
         float lat = carloop.gps().location.lat();
         float lng = carloop.gps().location.lng();
-        /*if (lat < 42.839807) {
-            client.stop();
-            client.connect(server2, 8001);
-        }*/
-        String gps = "";
-        String package = "";
 
-        gps.concat(lat);
-        gps.concat(",");
-        gps.concat(lng);
+        if (mapped) {
+            String gps = "";
+            String package = "";
 
-        CANMessage message;
-        String Canmessage = "";
+            gps.concat(lat);
+            gps.concat(",");
+            gps.concat(lng);
 
-        if (carloop.can().receive(message)) {
-            package.concat(message.id);
-            package.concat(",");
-            for (int i = 0; i < message.len; i++) {
-                Canmessage.concat(message.data[i]);
-            }
-            package.concat(Canmessage);
-            package.concat(",");
-        }
-        package.concat(gps);
-        package.concat(",");
-        package.concat(millis());
-        package.concat(";");
+            CANMessage message;
+            String Canmessage = "";
 
-        if (client.connected()) {
-            /*if (counter > 0) {
-                int tCounter = 0;
-                while (tCounter < counter) {
-
+            if (carloop.can().receive(message)) {
+                package.concat(message.id);
+                package.concat(",");
+                for (int i = 0; i < message.len; i++) {
+                    Canmessage.concat(message.data[i]);
                 }
+                package.concat(Canmessage);
+                package.concat(",");
             }
+            package.concat(gps);
+            package.concat(",");
+            package.concat(millis());
+            package.concat(";");
 
-            while (counter > 0) {
-                counter--;
-                Particle.publish(backlog[counter]);
-            }*/
-            client.write(package);
-            Particle.publish(package, PUBLIC);
+            if (client.connected()) {
+                client.write(package);
+                Particle.publish(package, PUBLIC);
+            } else {
+                client.connect(server, 8001);
+                client.write(package);
+                Particle.publish(package, PUBLIC);
+            }
         } else {
-            client.connect(server, 8001);
-            client.write(package);
-            Particle.publish(package, PUBLIC);
+            if (client.connected()) {
+
+            } else {
+
+            }
         }
-    } /*else {
-        //Particle.publish("INVALID~GPS", PUBLIC);
+    } else {
+        Particle.publish("INVALID~GPS", PUBLIC);
 
         CANMessage message;
-        String Canmessage = "";
-        String package = "";
+    }
 
-        if (carloop.can().receive(message)) {
-            package.concat(message.id);
-            package.concat(",");
-            for (int i = 0; i < message.len; i++) {
-                Canmessage.concat(message.data[i]);
-            }
-            package.concat(Canmessage);
-            package.concat(",");
-        }
-        package.concat(Time.timeStr());
-        Particle.publish(Time.timeStr());
-        package.concat(";1");
-        client.write(package);*
-    }/
-*/
     String response = "";
     while (client.available()) {
         char c = client.read();
         response.concat(c);
     }
 
-    /*if (counter == 15) {
-        if (!toggle) {
-            client.stop();
-            client.connect(server2, 8001);
-            counter = 0;
-        } else {
-            client.stop();
-            client.connect(server, 8001);
-            counter = 0;
-        }
-        toggle = !toggle;
-    } else {
-        counter++;
-    }*/
     if (!client.connected()) {
         client.connect(server, 8001);
     }
-    delay(500);
+    //delay(50);
 }
