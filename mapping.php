@@ -89,7 +89,7 @@ while(true) {
                          $stmt2 = $db->prepare($sql2);
                          $stmt2->bindValue(1, $location_id, PDO::PARAM_INT);
                          $stmt2->execute();
-                         $ip_address = $stmt->fetch(PDO::FETCH_ASSOC)["ip_address"];
+                         $ip_address = $stmt2->fetch(PDO::FETCH_ASSOC)["ip_address"];
 
                          echo "ip address : " . $ip_address . "\n";
 
