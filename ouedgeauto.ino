@@ -72,7 +72,7 @@ void loop() {
                 client.write(package);
                 Particle.publish(package, PUBLIC);
             } else {
-                client.connect(server, 8001);
+                client.connect(mappingServer, 8001);
                 client.write(package);
                 Particle.publish(package, PUBLIC);
             }
@@ -86,6 +86,13 @@ void loop() {
     } else {
         Particle.publish("INVALID~GPS", PUBLIC);
 
+        String pack = "";
+        pack.concat(session_id);
+        pack.concat(";");
+
+        client.write(pack);
+        delay(2000);
+
         CANMessage message;
     }
 
@@ -96,7 +103,7 @@ void loop() {
     }
 
     if (!client.connected()) {
-        client.connect(server, 8001);
+        client.connect(mappingServer, 8001);
     }
     //delay(50);
 }

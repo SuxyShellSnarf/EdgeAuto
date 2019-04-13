@@ -65,7 +65,7 @@ while(true) {
                          $sql = "insert into session () values ()";
                          $stmt = $db->prepare($sql);
                          $stmt->execute();
-                         $id = $stmt->lastInsertId();
+                         $id = $db->lastInsertId();
                          echo $id;
                      } else if ($message[$counter] != "") {
                          $gpsMapping = explode(",", $message[$counter]);
