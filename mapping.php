@@ -67,7 +67,11 @@ while(true) {
                          $stmt->execute();
                          $id = $db->lastInsertId();
                          echo $id . "\n";
-                         socket_write($read_socket, $id);
+                         $package = array(
+                             "id" => $id,
+                             "message" => "Test"
+                         );
+                         socket_write($read_socket, $package);
                      } else if ($message[$counter] != "") {
                          $gpsMapping = explode(",", $message[$counter]);
                          $gps = array(
