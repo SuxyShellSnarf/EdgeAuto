@@ -57,7 +57,7 @@ void setup() {
 
     // Now we know who you are.
     carloop.begin();
-    Particle.publish("Begin", PUBLIC);
+    Particle.publish("BEGIN", PUBLIC);
 }
 
 // Keep going round and round.
@@ -116,7 +116,7 @@ void loop() {
                     unsigned int value = response.toInt();
                     tempServer[counter] = value;
                     temp.concat(response);
-                    temp.concat(response);
+                    temp.concat(".");
                     response = "";
                     counter++;
                 } else if (c == ';') {
