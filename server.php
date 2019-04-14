@@ -65,7 +65,7 @@ while(true) {
                      if ($message[$counter] != "") {
                          $canbusdump = explode(",", $message[$counter]);
 
-                         if (count($canbusdump) == 5) {
+                         if (count($canbusdump) == 6) {
                              $canbus = array(
                                  "arb_id" => $canbusdump[0],
                                  "message" => $canbusdump[1],
