@@ -66,7 +66,7 @@ while(true) {
                          $stmt = $db->prepare($sql);
                          $stmt->execute();
                          $id = $db->lastInsertId();
-                         echo $id . "\n";
+
                          socket_write($read_socket, $id);
                      } else if ($message[$counter] != "") {
                          $gpsMapping = explode(",", $message[$counter]);
@@ -75,19 +75,10 @@ while(true) {
                              "longitude" => $gpsMapping[1]
                          );
 
-                         $sql = "select location_id from location where upperlat >= :latitude and lowerlat < :latitude and upperlng >= :longitude and lowerlng < :longitude";
+                         $sql = "select node.ip_address from node left join location using (location_id) where location.upperlat >= :latitude and location.lowerlat < :latitude and location.upperlng >= :longitude and location.lowerlng < :longitude";
                          $stmt = $db->prepare($sql);
                          $stmt->execute($gps);
-                         $location_id = $stmt->fetch(PDO::FETCH_ASSOC)["location_id"];
-                         echo "location_id : " . $location_id . "\n";
-                         $sql2 = "select ip_address from node where location_id = ?";
-                         $stmt2 = $db->prepare($sql2);
-                         $stmt2->bindValue(1, $location_id, PDO::PARAM_INT);
-                         $stmt2->execute();
-                         $ip_address = $stmt2->fetch(PDO::FETCH_ASSOC)["ip_address"];
-
-                         echo "ip address : " . $ip_address . "\n";
-
+                         $ip_address = $stmt->fetch(PDO::FETCH_ASSOC)["ip_address"];
                          $ip_address .= ";";
 
                          socket_write($read_socket, $ip_address);

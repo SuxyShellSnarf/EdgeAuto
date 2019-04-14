@@ -12,7 +12,7 @@ TinyGPSPlus gps;
 TCPClient client;
 byte mappingServer[] = { 35, 237, 136, 160 };
 byte server[4] = {};
-String tag = "";
+String currentServer = "";
 bool mapped = false;
 int counter = 0;
 int session_id = -1;
@@ -29,7 +29,10 @@ void setup() {
     WiFi.setCredentials(credentials);
     WiFi.connect();
 
-    client.connect(mappingServer, 8001);
+    while (!client.connected()) {
+        client.connect(mappingServer, 8001);
+    }
+
     String response = "";
     while (client.available()) {
         char c = client.read();
@@ -76,29 +79,29 @@ void loop() {
 
             if (client.connected()) {
                 client.write(package);
-                Particle.publish(package, PUBLIC);
             } else {
                 client.connect(mappingServer, 8001);
                 client.write(package);
-                Particle.publish(package, PUBLIC);
             }
         } else {
-            if (client.connected()) {
 
-            } else {
-
-            }
         }
     } else {
         //Particle.publish("INVALID~GPS", PUBLIC);
 
         if (session_id == -1) {
             String pack = "";
-            pack.concat(session_id + ";");
+            pack.concat(session_id);
+            pack.concat(";");
+
+            Particle.publish(pack, PUBLIC);
 
             client.write(pack);
-            delay(500);
+
             String response = "";
+            while (!client.available()) {
+                //Wait until you get a response back
+            }
             while (client.available()) {
                 char c = client.read();
                 response.concat(c);
@@ -109,13 +112,14 @@ void loop() {
             String package = "42.8,-83.5";
             client.write(package);
 
-            delay(500);
-
             String response = "";
             counter = 0;
+            while (!client.available()) {
+                //Wait until you get a response back
+            }
             while (client.available()) {
                 char c = client.read();
-                if (c == '.') {
+                if (c == '.' || c == ';') {
                     unsigned int value = response.toInt();
                     server[counter] = value;
 
@@ -126,18 +130,20 @@ void loop() {
                 }
             }
 
-            delay(1000);
-            Particle.publish(String(server[0]), PUBLIC);
-            delay(1000);
-            Particle.publish(String(server[1]), PUBLIC);
-            delay(1000);
-            Particle.publish(String(server[2]), PUBLIC);
-            delay(1000);
-            Particle.publish(String(server[3]), PUBLIC);
+            String delicate = "";
+            delicate.concat(server[0]);
+            delicate.concat(".");
+            delicate.concat(server[1]);
+            delicate.concat(".");
+            delicate.concat(server[2]);
+            delicate.concat(".");
+            delicate.concat(server[3]);
 
+            Particle.publish(delicate, PUBLIC);
+
+            currentServer = delicate;
 
             client.stop();
-            delay(4000);
             client.connect(server, 8001);
             if (client.connected()) {
                 Particle.publish("WOO", PUBLIC);

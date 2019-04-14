@@ -39,6 +39,7 @@ while(true) {
      //Loop through all of the available sockets
     foreach ($read as $read_socket) {
         $data = @socket_read($read_socket, 4096, PHP_BINARY_READ);
+        $ip_address = "";
 
         //Iterate through all of the connected lines and determine if any have been disconnected and remove them
         if ($data === "") {
@@ -52,11 +53,12 @@ while(true) {
 
         //If there is data, proceed
         if (!empty($data)) {
-             echo "Data sent {$data}\n";
+             echo "Data sent :{$data}\n";
              $message = array();
              //Break down the message into parts : user_id, message, lat, lng
              $message = explode(";", $data);
 
+             //
              if (count($message) > 0) {
                  $counter = 0;
                  while ($counter < count($message)) {
@@ -71,6 +73,7 @@ while(true) {
                                  "longitude" => $canbusdump[3],
                                  "cantime" => $canbusdump[4]
                              );
+
                              $sql = "INSERT INTO message (arb_id, message, latitude, longitude, cantime) values (:arb_id, :message, :latitude, :longitude, :cantime)";
                              //Add this information!
                              $stmt = $db->prepare($sql);
@@ -81,6 +84,18 @@ while(true) {
                      
                      $counter++;
                  }
+
+                 $gpsTracking = array(
+                     "latitude" => $canbus["latitude"],
+                     "longitude" => $canbus["longitude"]
+                 );
+
+                 // Determine the ip_address of the node the last message should belong too.
+                 $sql = "select node.ip_address from node left join location using (location_id) where location.upperlat >= :latitude and location.lowerlat < :latitude and location.upperlng >= :longitude and location.lowerlng < :longitude";
+                 $stmt = $db->prepare($sql);
+                 $stmt->execute($gpsTracking);
+                 $ip_address = $stmt->fetch(PDO::FETCH_ASSOC)["ip_address"];
+                 socket_write($read_socket, $ip_address);
              }
 
              //Respond
@@ -89,7 +104,6 @@ while(true) {
                      continue;
                  }
                 echo "SEND SOCKET: " . $send_socket . "\n";
-                 socket_write($send_socket, $data);
              }
          }
      }
