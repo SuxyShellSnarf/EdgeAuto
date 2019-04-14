@@ -17,6 +17,7 @@ bool mapped = false;
 int counter = 0;
 int session_id = -1;
 String backlog[500];
+bool available = false;
 
 // Let's get this thing going!
 void setup() {
@@ -110,6 +111,7 @@ void loop() {
             String temp = "";
             String response = "";
             byte tempServer[4] = {};
+
             while (client.available()) {
                 char c = client.read();
                 if (c == '.') {
@@ -126,10 +128,11 @@ void loop() {
                 } else {
                     response.concat(c);
                 }
+                available = true;
             }
 
             // If you have new information, go with it.
-            if (currentServer.compareTo(temp) != 0) {
+            if (available && currentServer.compareTo(temp) != 0) {
                 currentServer = temp;
                 counter = 0;
                 while (counter < 4) {
@@ -138,6 +141,7 @@ void loop() {
                 }
                 client.stop();
                 client.connect(server, 8001);
+                available = false;
             }
         } else {
             // If the carloop hasn't been mapped, gather your documentation and figure out where you go.
