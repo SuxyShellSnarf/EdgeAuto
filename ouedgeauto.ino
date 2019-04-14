@@ -133,7 +133,7 @@ void loop() {
                 currentServer = temp;
                 counter = 0;
                 while (counter < 4) {
-                    server [counter] = tempServer[counter];
+                    server[counter] = tempServer[counter];
                     counter++;
                 }
                 client.stop();
