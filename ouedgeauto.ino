@@ -24,8 +24,8 @@ void setup() {
 
     // Connect to a hotspot(aka WiFi).
     WiFi.on();
-    WiFiCredentials credentials("Lucas's iPhone", WPA2);
-    credentials.setPassword("mrsaxy10");
+    WiFiCredentials credentials("Samsung Galaxy Note8 5908", WPA2);
+    credentials.setPassword("12345678");
     credentials.setCipher(WLAN_CIPHER_AES);
     WiFi.setCredentials(credentials);
     WiFi.connect();
