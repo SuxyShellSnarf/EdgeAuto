@@ -71,11 +71,12 @@ while(true) {
                                  "message" => $canbusdump[1],
                                  "latitude" => $canbusdump[2],
                                  "longitude" => $canbusdump[3],
-                                 "cantime" => $canbusdump[4]
+                                 "cantime" => $canbusdump[4],
+                                 "session_id" => $canbusdump[5]
                              );
 
                              //Add this information!
-                             $sql = "INSERT INTO message (arb_id, message, latitude, longitude, cantime) values (:arb_id, :message, :latitude, :longitude, :cantime)";
+                             $sql = "INSERT INTO message (arb_id, message, latitude, longitude, cantime, session_id) values (:arb_id, :message, :latitude, :longitude, :cantime, :session_id)";
                              $stmt = $db->prepare($sql);
                              $stmt->execute($canbus);
                              echo "Package: " . print_r($canbus, true);

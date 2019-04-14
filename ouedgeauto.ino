@@ -20,6 +20,7 @@ String backlog[500];
 
 // Let's get this thing going!
 void setup() {
+    Particle.publish("Initialize", PUBLIC);
     Time.zone(-4);
 
     // Connect to a hotspot(aka WiFi).
@@ -92,6 +93,8 @@ void loop() {
             package.concat(gps);
             package.concat(",");
             package.concat(millis());
+            package.concat(",");
+            package.concat(session_id);
             package.concat(";");
 
             if (client.connected()) {
