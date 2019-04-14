@@ -80,16 +80,16 @@ while(true) {
                              $stmt = $db->prepare($sql);
                              $stmt->execute($canbus);
                              echo "Package: " . print_r($canbus, true);
+                             $gpsTracking = array(
+                                 "latitude" => $canbus["latitude"],
+                                 "longitude" => $canbus["longitude"]
+                             );
                          }
                      }
                      
                      $counter++;
                  }
 
-                 $gpsTracking = array(
-                     "latitude" => $canbus["latitude"],
-                     "longitude" => $canbus["longitude"]
-                 );
 
                  // Determine the ip_address of the node the last message should belong too.
                  $sql = "select node.ip_address from node left join location using (location_id) where location.upperlat >= :latitude and location.lowerlat < :latitude and location.upperlng >= :longitude and location.lowerlng < :longitude";
