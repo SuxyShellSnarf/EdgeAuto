@@ -18,28 +18,43 @@ int counter = 0;
 int session_id = -1;
 String backlog[500];
 
+// Let's get this thing going!
 void setup() {
     Time.zone(-4);
+
+    // Connect to a hotspot(aka WiFi).
     WiFi.on();
     WiFiCredentials credentials("Lucas's iPhone", WPA2);
-
     credentials.setPassword("mrsaxy10");
     credentials.setCipher(WLAN_CIPHER_AES);
-
     WiFi.setCredentials(credentials);
     WiFi.connect();
+    waitFor(WiFi.ready, 1000);
 
+    // Make sure you are connected to the mapping node.
     while (!client.connected()) {
         client.connect(mappingServer, 8001);
     }
 
+    // Tell the mapping node a little bit about yourself.
+    String pack = "";
+    pack.concat(session_id);
+    pack.concat(";");
+    client.write(pack);
+
+    // Wait until they write back.
     String response = "";
+    while (!client.available()) {
+        //Wait until you get a response back
+    }
     while (client.available()) {
         char c = client.read();
         response.concat(c);
     }
-    waitFor(WiFi.ready, 1000);
+    Particle.publish(response, PUBLIC);
+    session_id = response.toInt();
 
+    // Now we know who you are.
     carloop.begin();
     Particle.publish("Begin", PUBLIC);
 }
@@ -80,78 +95,90 @@ void loop() {
             if (client.connected()) {
                 client.write(package);
             } else {
-                client.connect(mappingServer, 8001);
+                while (!client.connected()) {
+                    client.connect(server, 8001);
+                }
                 client.write(package);
             }
-        } else {
 
-        }
-    } else {
-        //Particle.publish("INVALID~GPS", PUBLIC);
-
-        if (session_id == -1) {
-            String pack = "";
-            pack.concat(session_id);
-            pack.concat(";");
-
-            Particle.publish(pack, PUBLIC);
-
-            client.write(pack);
-
+            // If someone is talking to you, you might want to listen.
+            String temp = "";
             String response = "";
-            while (!client.available()) {
-                //Wait until you get a response back
-            }
+            byte tempServer[4] = {};
             while (client.available()) {
                 char c = client.read();
-                response.concat(c);
-            }
-            Particle.publish(response, PUBLIC);
-            session_id = response.toInt();
-        } else {
-            String package = "42.8,-83.5";
-            client.write(package);
-
-            String response = "";
-            counter = 0;
-            while (!client.available()) {
-                //Wait until you get a response back
-            }
-            while (client.available()) {
-                char c = client.read();
-                if (c == '.' || c == ';') {
+                if (c == '.') {
                     unsigned int value = response.toInt();
-                    server[counter] = value;
-
+                    tempServer[counter] = value;
+                    temp.concat(response);
+                    temp.concat(response);
                     response = "";
                     counter++;
+                } else if (c == ';') {
+                    unsigned int value = response.toInt();
+                    tempServer[counter] = value;
+                    temp.concat(response);
                 } else {
                     response.concat(c);
                 }
             }
 
-            String delicate = "";
-            delicate.concat(server[0]);
-            delicate.concat(".");
-            delicate.concat(server[1]);
-            delicate.concat(".");
-            delicate.concat(server[2]);
-            delicate.concat(".");
-            delicate.concat(server[3]);
+            // If you have new information, go with it.
+            if (currentServer.compareTo(temp) != 0) {
+                currentServer = temp;
+                counter = 0;
+                while (counter < 4) {
+                    server [counter] = tempServer[counter];
+                    counter++;
+                }
+                client.stop();
+                client.connect(server, 8001);
+            }
+        } else {
+            // If the carloop hasn't been mapped, gather your documentation and figure out where you go.
+            // Collect the gps data.
+            String gps = "";
+            gps.concat(lat);
+            gps.concat(",");
+            gps.concat(lng);
+            gps.concat(";");
 
-            Particle.publish(delicate, PUBLIC);
+            client.write(gps);
 
-            currentServer = delicate;
+            String response = "";
+            counter = 0;
 
+            //Wait until the server responds.
+            while (!client.available()) {
+                //Wait until you get a response back
+            }
+            // Great! You have a response, now construct it.
+            while (client.available()) {
+                char c = client.read();
+                if (c == '.') {
+                    unsigned int value = response.toInt();
+                    server[counter] = value;
+                    currentServer.concat(response);
+                    currentServer.concat(response);
+                    response = "";
+                    counter++;
+                } else if (c == ';') {
+                    unsigned int value = response.toInt();
+                    server[counter] = value;
+                    currentServer.concat(response);
+                } else {
+                    response.concat(c);
+                }
+            }
+
+            // Stop talking to the mapping node and move onto the next node. You are now mapped!
             client.stop();
             client.connect(server, 8001);
-            if (client.connected()) {
-                Particle.publish("WOO", PUBLIC);
-            }
+            mapped = true;
         }
+    } else {
+        // Notify the console and wait until GPS is proper.
+        Particle.publish("INVALID~GPS", PUBLIC);
+        delay(1000);
     }
-
-    /*if (!client.connected()) {
-        client.connect(mappingServer, 8001);
-    }*/
 }
