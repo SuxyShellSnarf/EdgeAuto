@@ -111,56 +111,60 @@ void loop() {
 
             if (client.connected()) {
                 client.write(package);
+                // If someone is talking to you, you might want to listen.
+                String temp = "";
+                String response = "";
+                byte tempServer[4] = {};
+
+                while (client.available()) {
+                    char c = client.read();
+                    if (c == '.') {
+                        unsigned int value = response.toInt();
+                        tempServer[counter] = value;
+                        temp.concat(response);
+                        temp.concat(".");
+                        response = "";
+                        counter++;
+                    } else if (c == ';') {
+                        unsigned int value = response.toInt();
+                        tempServer[counter] = value;
+                        temp.concat(response);
+                    } else {
+                        response.concat(c);
+                    }
+                    available = true;
+                }
+
+                errorMsg.concat(available);
+                errorMsg.concat("; CurrentNode = ");
+                errorMsg.concat(currentServer);
+                errorMsg.concat("; UpdateNode = ");
+                errorMsg.concat(temp);
+
+                // If you have new information, go with it.
+                if (available && currentServer.compareTo(temp) != 0) {
+                    currentServer = temp;
+                    counter = 0;
+                    while (counter < 4) {
+                        server[counter] = tempServer[counter];
+                        counter++;
+                    }
+                    client.write(errorMsg);
+                    client.stop();
+                    client.connect(server, 8001);
+                    available = false;
+                }
             } else {
                 while (!client.connected()) {
-                    client.connect(server, 8001);
+                    client.connect(mappingServer, 8001);
                 }
+                mapped = false;
+                currentServer = "";
+                package = gps;
+                package.concat(";");
                 client.write(package);
             }
 
-            // If someone is talking to you, you might want to listen.
-            String temp = "";
-            String response = "";
-            byte tempServer[4] = {};
-
-            while (client.available()) {
-                char c = client.read();
-                if (c == '.') {
-                    unsigned int value = response.toInt();
-                    tempServer[counter] = value;
-                    temp.concat(response);
-                    temp.concat(".");
-                    response = "";
-                    counter++;
-                } else if (c == ';') {
-                    unsigned int value = response.toInt();
-                    tempServer[counter] = value;
-                    temp.concat(response);
-                } else {
-                    response.concat(c);
-                }
-                available = true;
-            }
-
-            errorMsg.concat(available);
-            errorMsg.concat("; CurrentNode = ");
-            errorMsg.concat(currentServer);
-            errorMsg.concat("; UpdateNode = ");
-            errorMsg.concat(temp);
-
-            // If you have new information, go with it.
-            if (available && currentServer.compareTo(temp) != 0) {
-                currentServer = temp;
-                counter = 0;
-                while (counter < 4) {
-                    server[counter] = tempServer[counter];
-                    counter++;
-                }
-                Particle.publish(errorMsg, PUBLIC);
-                client.stop();
-                client.connect(server, 8001);
-                available = false;
-            }
         } else {
             // If the carloop hasn't been mapped, gather your documentation and figure out where you go.
             // Collect the gps data.
