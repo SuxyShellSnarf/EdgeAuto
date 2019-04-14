@@ -58,7 +58,7 @@ while(true) {
              //Break down the message into parts : user_id, message, lat, lng
              $message = explode(";", $data);
 
-             //
+             // Go through all of your messages, you're kinda popular.
              if (count($message) > 0) {
                  $counter = 0;
                  while ($counter < count($message)) {
@@ -74,8 +74,8 @@ while(true) {
                                  "cantime" => $canbusdump[4]
                              );
 
-                             $sql = "INSERT INTO message (arb_id, message, latitude, longitude, cantime) values (:arb_id, :message, :latitude, :longitude, :cantime)";
                              //Add this information!
+                             $sql = "INSERT INTO message (arb_id, message, latitude, longitude, cantime) values (:arb_id, :message, :latitude, :longitude, :cantime)";
                              $stmt = $db->prepare($sql);
                              $stmt->execute($canbus);
                              echo "Package: " . print_r($canbus, true);
