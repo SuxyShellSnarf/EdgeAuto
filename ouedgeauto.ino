@@ -15,6 +15,7 @@ byte server[4] = {};
 String currentServer = "";
 bool mapped = false;
 int counter = 0;
+int xcounter = 0;
 int session_id = -1;
 String backlog[500];
 bool available = false;
@@ -139,6 +140,7 @@ void loop() {
                     server[counter] = tempServer[counter];
                     counter++;
                 }
+                Particle.publish("WHY THE FUCK YOU COME HERE YOU INBRED", PUBLIC);
                 client.stop();
                 client.connect(server, 8001);
                 available = false;
@@ -190,4 +192,5 @@ void loop() {
         Particle.publish("INVALID~GPS", PUBLIC);
         delay(1000);
     }
+    xcounter++;
 }
