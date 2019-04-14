@@ -19,6 +19,7 @@ int xcounter = 0;
 int session_id = -1;
 String backlog[500];
 bool available = false;
+String errorMsg = "";
 
 // Let's get this thing going!
 void setup() {
@@ -64,8 +65,14 @@ void setup() {
 
 // Keep going round and round.
 void loop() {
+    errorMsg = "gpsValid = ";
     carloop.update();
     bool gpsValid = carloop.gps().location.isValid();
+
+    errorMsg.concat(gpsValid);
+    errorMsg.concat("; Mapped = ");
+    errorMsg.concat(mapped);
+    errorMsg.concat("; Message = ");
 
     // Are you actually somewhere or nowhere?
     if (gpsValid) {
@@ -98,6 +105,9 @@ void loop() {
             package.concat(",");
             package.concat(session_id);
             package.concat(";");
+
+            errorMsg.concat(package);
+            errorMsg.concat("; Available = ");
 
             if (client.connected()) {
                 client.write(package);
@@ -132,6 +142,12 @@ void loop() {
                 available = true;
             }
 
+            errorMsg.concat(available);
+            errorMsg.concat("; CurrentNode = ");
+            errorMsg.concat(currentServer);
+            errorMsg.concat("; UpdateNode = ");
+            errorMsg.concat(temp);
+
             // If you have new information, go with it.
             if (available && currentServer.compareTo(temp) != 0) {
                 currentServer = temp;
@@ -140,7 +156,7 @@ void loop() {
                     server[counter] = tempServer[counter];
                     counter++;
                 }
-                Particle.publish("WHY THE FUCK YOU COME HERE YOU INBRED", PUBLIC);
+                Particle.publish(errorMsg, PUBLIC);
                 client.stop();
                 client.connect(server, 8001);
                 available = false;
