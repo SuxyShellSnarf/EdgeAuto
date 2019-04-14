@@ -59,10 +59,12 @@ void setup() {
     Particle.publish("Begin", PUBLIC);
 }
 
+// Keep going round and round.
 void loop() {
     carloop.update();
     bool gpsValid = carloop.gps().location.isValid();
 
+    // Are you actually somewhere or nowhere?
     if (gpsValid) {
         float lat = carloop.gps().location.lat();
         float lng = carloop.gps().location.lng();
