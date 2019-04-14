@@ -4,10 +4,10 @@ user_id int unsigned auto_increment primary key
 );*/
 
 -- This is where the actual CANbus message will be stored on the edge nodes
-create table message (
+create table message1 (
 message_id int unsigned auto_increment primary key,
 created datetime default CURRENT_TIMESTAMP,
-arb_id int varchar(16),
+arb_id varchar(16),
 message varchar(64),
 latitude float,
 longitude float,
