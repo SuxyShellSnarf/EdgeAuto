@@ -106,8 +106,8 @@ while(true) {
                  }
                 echo "SEND SOCKET: " . $send_socket . "\n";
              }
-         }
-     }
+        }
+    }
 }
 
 //We are done here
