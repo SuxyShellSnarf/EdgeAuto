@@ -186,7 +186,6 @@ void loop() {
                     unsigned int value = response.toInt();
                     server[counter] = value;
                     currentServer.concat(response);
-                    currentServer.concat(response);
                     response = "";
                     counter++;
                 } else if (c == ';') {
