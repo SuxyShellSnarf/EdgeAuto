@@ -105,6 +105,7 @@ void loop() {
                 // If someone is talking to you, you might want to listen.
                 String temp = "";
                 String response = "";
+                counter = 0;
                 byte tempServer[4] = {};
 
                 while (client.available()) {
@@ -129,8 +130,6 @@ void loop() {
                     }
                 }
 
-                errorMsg.concat(available);
-                errorMsg.concat(";");
                 errorMsg.concat(currentServer);
                 errorMsg.concat(";");
                 errorMsg.concat(temp);
