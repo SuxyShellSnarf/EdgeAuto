@@ -15,7 +15,6 @@ byte server[4] = {};
 String currentServer = "";
 bool mapped = false;
 int counter = 0;
-int xcounter = 0;
 int session_id = -1;
 String backlog[500];
 bool available = false;
@@ -65,14 +64,14 @@ void setup() {
 
 // Keep going round and round.
 void loop() {
-    errorMsg = "gpsValid = ";
+    errorMsg = "";
     carloop.update();
     bool gpsValid = carloop.gps().location.isValid();
 
     errorMsg.concat(gpsValid);
-    errorMsg.concat("; Mapped = ");
+    errorMsg.concat(";");
     errorMsg.concat(mapped);
-    errorMsg.concat("; Message = ");
+    errorMsg.concat(";");
 
     // Are you actually somewhere or nowhere?
     if (gpsValid) {
@@ -106,9 +105,6 @@ void loop() {
             package.concat(session_id);
             package.concat(";");
 
-            errorMsg.concat(package);
-            errorMsg.concat("; Available = ");
-
             if (client.connected()) {
                 client.write(package);
                 // If someone is talking to you, you might want to listen.
@@ -136,20 +132,20 @@ void loop() {
                 }
 
                 errorMsg.concat(available);
-                errorMsg.concat("; CurrentNode = ");
+                errorMsg.concat(";");
                 errorMsg.concat(currentServer);
-                errorMsg.concat("; UpdateNode = ");
+                errorMsg.concat(";");
                 errorMsg.concat(temp);
 
                 // If you have new information, go with it.
-                if (available && currentServer.compareTo(temp) != 0) {
+                if (available && currentServer.compareTo(temp) != 0 && temp != "") {
                     currentServer = temp;
                     counter = 0;
                     while (counter < 4) {
                         server[counter] = tempServer[counter];
                         counter++;
                     }
-                    client.write(errorMsg);
+                    Particle.publish(errorMsg, PUBLIC);
                     client.stop();
                     client.connect(server, 8001);
                     available = false;
@@ -164,7 +160,7 @@ void loop() {
                 package.concat(";");
                 client.write(package);
             }
-
+            delay(500);
         } else {
             // If the carloop hasn't been mapped, gather your documentation and figure out where you go.
             // Collect the gps data.
@@ -212,5 +208,4 @@ void loop() {
         Particle.publish("INVALID~GPS", PUBLIC);
         delay(1000);
     }
-    xcounter++;
 }
