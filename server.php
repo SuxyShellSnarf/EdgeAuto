@@ -96,6 +96,7 @@ while(true) {
                  $stmt = $db->prepare($sql);
                  $stmt->execute($gpsTracking);
                  $ip_address = $stmt->fetch(PDO::FETCH_ASSOC)["ip_address"];
+                 $ip_address .= ";";
                  socket_write($read_socket, $ip_address);
              }
 

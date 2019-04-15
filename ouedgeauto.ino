@@ -68,11 +68,6 @@ void loop() {
     carloop.update();
     bool gpsValid = carloop.gps().location.isValid();
 
-    errorMsg.concat(gpsValid);
-    errorMsg.concat(";");
-    errorMsg.concat(mapped);
-    errorMsg.concat(";");
-
     // Are you actually somewhere or nowhere?
     if (gpsValid) {
         float lat = carloop.gps().location.lat();
@@ -114,21 +109,24 @@ void loop() {
 
                 while (client.available()) {
                     char c = client.read();
-                    if (c == '.') {
-                        unsigned int value = response.toInt();
-                        tempServer[counter] = value;
-                        temp.concat(response);
-                        temp.concat(".");
-                        response = "";
-                        counter++;
-                    } else if (c == ';') {
-                        unsigned int value = response.toInt();
-                        tempServer[counter] = value;
-                        temp.concat(response);
-                    } else {
-                        response.concat(c);
+                    if (counter < 4) {
+                        if (c == '.') {
+                            unsigned int value = response.toInt();
+                            tempServer[counter] = value;
+                            temp.concat(response);
+                            temp.concat(".");
+                            response = "";
+                            counter++;
+                        } else if (c == ';') {
+                            unsigned int value = response.toInt();
+                            tempServer[counter] = value;
+                            temp.concat(response);
+                            counter++;
+                        } else {
+                            response.concat(c);
+                        }
+                        available = true;
                     }
-                    available = true;
                 }
 
                 errorMsg.concat(available);
