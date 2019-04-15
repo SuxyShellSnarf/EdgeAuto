@@ -160,7 +160,6 @@ void loop() {
                 package.concat(";");
                 client.write(package);
             }
-            delay(500);
         } else {
             // If the carloop hasn't been mapped, gather your documentation and figure out where you go.
             // Collect the gps data.
@@ -186,6 +185,7 @@ void loop() {
                     unsigned int value = response.toInt();
                     server[counter] = value;
                     currentServer.concat(response);
+                    currentServer.concat(".");
                     response = "";
                     counter++;
                 } else if (c == ';') {
