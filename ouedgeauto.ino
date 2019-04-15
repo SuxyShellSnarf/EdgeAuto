@@ -204,4 +204,5 @@ void loop() {
         Particle.publish("INVALID~GPS", PUBLIC);
         delay(1000);
     }
+    delay(10);
 }
